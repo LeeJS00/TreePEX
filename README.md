@@ -15,6 +15,11 @@ License-free PEX 도구로, StarRC와 **동일한 입력**(DEF / LEF / Liberty /
 **4.98% MAPE / 7 s (tv80s)** 또는 **5.28% MAPE / 70 s (nova)** 정확도/속도로 SPEF를 생성한다.
 Cadence Innovus (6.96% / 분 단위)와 OpenRCX (8.83% / 분 단위) 대비 정확도 + 속도 모두 우위.
 
+**Cross-PDK** (2026-05-14 추가): Intel 22nm + **ASAP7 7nm** 두 PDK 모두 지원.
+ASAP7 5-seed Tweedie XGBoost ensemble — tv80s 6.68% / nova 7.03% MAPE.
+**Methodology bit-identical** (same hyperparams, 67-D feature schema, 5 seeds).
+Per-PDK 사용법: `python3 scripts/pex_tool.py --pdk asap7 --design asap7_gcd_x1` ([docs/CROSS_PDK.md](docs/CROSS_PDK.md)).
+
 ---
 
 ## 2. 빠른 시작 (Smoke test)
@@ -139,10 +144,14 @@ SPEF schema (per net):
 
 ### 5.1 정확도
 
-| Design | tot MAPE | gnd MAPE | cpl MAPE | R²_tot |
-|---|---:|---:|---:|---:|
-| **intel22_tv80s_f3** (3,280 nets) | **4.98 %** | 18.02 % | 13.27 % | 0.9940 |
-| **intel22_nova_f3** (113,812 nets) | **5.28 %** | 17.40 % | 14.96 % | 0.9911 |
+| PDK | Design | tot MAPE | gnd MAPE | cpl MAPE | R²_tot |
+|---|---|---:|---:|---:|---:|
+| **Intel 22nm** | **intel22_tv80s_f3** (3,280 nets) | **4.98 %** | 18.02 % | 13.27 % | 0.9940 |
+| **Intel 22nm** | **intel22_nova_f3** (113,812 nets) | **5.28 %** | 17.40 % | 14.96 % | 0.9911 |
+| **ASAP7 7nm** | **asap7_tv80s_x1** (3,328 nets) | **6.68 %** | 20.17 % | 9.10 % | 0.9801 |
+| **ASAP7 7nm** | **asap7_nova_x1** (125,499 nets) | **7.03 %** | 21.22 % | 9.35 % | 0.9816 |
+
+ASAP7 모델은 `models_asap7/` 에 동봉. 자세한 cross-PDK 분석은 [paper_benchmark/CROSS_PDK_TABLE.md](paper_benchmark/CROSS_PDK_TABLE.md) 참조.
 
 ### 5.2 Wall-clock (DEF → SPEF, 16-worker, Round 4 njit)
 

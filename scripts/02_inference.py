@@ -9,6 +9,7 @@ Output: outputs/predictions/<design>_pred.csv
 from __future__ import annotations
 
 import argparse
+import sys
 import time
 from pathlib import Path
 
@@ -16,35 +17,26 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-MODELS = ROOT / "models"
+sys.path.insert(0, str(ROOT / "scripts"))
+from pdk_paths import get_pdk  # noqa: E402
+
 OUTPUTS = ROOT / "outputs" / "predictions"
 OUTPUTS.mkdir(parents=True, exist_ok=True)
-
-import os
-# Override via env: TREEPEX_V3_FEATURES, TREEPEX_V4_NEW_FEATS for re-running on
-# externally cached feature CSVs. Default points to a PINNPEX site path; for a
-# standalone deployment use pex_cold.py (DEF→SPEF) instead of this split path.
-V3_FEATURES = os.environ.get(
-    "TREEPEX_V3_FEATURES",
-    "/data/PINNPEX/data/processed_v3/intel22/features/all_designs.csv")
-V4_NEW_FEATS = os.environ.get(
-    "TREEPEX_V4_NEW_FEATS",
-    "/home/jslee/projects/PINNPEX/archive/pex_v4/results/new_features_with_ids.csv")
 
 SEEDS = [42, 0, 1, 2, 3]
 
 
-def load_models():
+def load_models(models_dir: Path):
     import xgboost as xgb
-    feat_order = (MODELS / "FEATURE_ORDER.txt").read_text().strip().split("\n")
+    feat_order = (models_dir / "FEATURE_ORDER.txt").read_text().strip().split("\n")
     g_models = []
     c_models = []
     for seed in SEEDS:
         mg = xgb.XGBRegressor()
-        mg.load_model(str(MODELS / f"tweedie_gnd_seed{seed}.json"))
+        mg.load_model(str(models_dir / f"tweedie_gnd_seed{seed}.json"))
         g_models.append(mg)
         mc = xgb.XGBRegressor()
-        mc.load_model(str(MODELS / f"tweedie_cpl_seed{seed}.json"))
+        mc.load_model(str(models_dir / f"tweedie_cpl_seed{seed}.json"))
         c_models.append(mc)
     return feat_order, g_models, c_models
 
@@ -58,20 +50,22 @@ def predict_ensemble(models, X):
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--design", type=str, required=True,
-                   help="e.g., intel22_tv80s_f3")
+                   help="e.g., intel22_tv80s_f3 or asap7_tv80s_x1")
+    p.add_argument("--pdk", default="intel22", choices=["intel22", "asap7"])
     return p.parse_args()
 
 
 def main():
     args = parse_args()
-    print(f">>> TreePEX STAGE 1 [inference] on design={args.design}")
-    feat_order, g_models, c_models = load_models()
+    pdk = get_pdk(args.pdk)
+    print(f">>> TreePEX STAGE 1 [inference] pdk={pdk.name} design={args.design}")
+    feat_order, g_models, c_models = load_models(pdk.models_dir)
     print(f">>> loaded {len(g_models)} gnd models + {len(c_models)} cpl models, "
-          f"{len(feat_order)} features")
+          f"{len(feat_order)} features  (models_dir={pdk.models_dir})")
 
     print(">>> loading per-net features ...")
-    base = pd.read_csv(V3_FEATURES)
-    new = pd.read_csv(V4_NEW_FEATS)
+    base = pd.read_csv(pdk.v3_features)
+    new = pd.read_csv(pdk.v4_new_feats)
     df = base.merge(new, on=["design_name", "net_name"], how="left")
     df = df.dropna(subset=feat_order).reset_index(drop=True)
     df = df[df["design_name"] == args.design].reset_index(drop=True)

@@ -53,7 +53,15 @@ def parse_args():
     p.add_argument("--design", type=str, required=True)
     p.add_argument("--design-stem", type=str, default=None,
                    help="Optional design stem to use in SPEF header (e.g., 'tv80s' instead of 'intel22_tv80s_f3')")
+    p.add_argument("--pdk", default="intel22", choices=["intel22", "asap7"],
+                   help="Drives default design-stem derivation only")
     return p.parse_args()
+
+
+def _default_stem(design: str, pdk: str) -> str:
+    if pdk == "asap7":
+        return design.replace("asap7_", "", 1).rsplit("_x1", 1)[0]
+    return design.split("intel22_")[-1].replace("_f3", "")
 
 
 def main():
@@ -63,7 +71,7 @@ def main():
         print(f"[error] missing {pred_csv}; run STAGE 1 first")
         return 1
     df = pd.read_csv(pred_csv)
-    design_stem = args.design_stem or args.design.split("intel22_")[-1].replace("_f3", "")
+    design_stem = args.design_stem or _default_stem(args.design, args.pdk)
     print(f">>> TreePEX STAGE 2 [spef-write] on {args.design} ({len(df):,} nets) → stem '{design_stem}'")
 
     t0 = time.time()

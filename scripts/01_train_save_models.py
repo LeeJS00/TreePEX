@@ -9,6 +9,7 @@ clean-clone perspective).
 """
 from __future__ import annotations
 
+import argparse
 import sys
 import time
 from pathlib import Path
@@ -17,18 +18,19 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-MODELS = ROOT / "models"
+sys.path.insert(0, str(ROOT / "scripts"))
+from pdk_paths import get_pdk  # noqa: E402
+
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--pdk", default="intel22", choices=["intel22", "asap7"])
+_args = _ap.parse_args()
+_PDK = get_pdk(_args.pdk)
+
+MODELS = _PDK.models_dir
 MODELS.mkdir(parents=True, exist_ok=True)
 
-import os
-# Override via env: TREEPEX_V3_FEATURES, TREEPEX_V4_NEW_FEATS for retraining
-# from externally cached feature CSVs.
-V3_FEATURES = os.environ.get(
-    "TREEPEX_V3_FEATURES",
-    "/data/PINNPEX/data/processed_v3/intel22/features/all_designs.csv")
-V4_NEW_FEATS = os.environ.get(
-    "TREEPEX_V4_NEW_FEATS",
-    "/home/jslee/projects/PINNPEX/archive/pex_v4/results/new_features_with_ids.csv")
+V3_FEATURES = _PDK.v3_features
+V4_NEW_FEATS = _PDK.v4_new_feats
 
 BASE_FEATURE_COLS = [
     "total_wire_length_um", "total_metal_area_um2", "n_cuboids",

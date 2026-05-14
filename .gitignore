@@ -16,6 +16,11 @@ outputs/*
 # Tile cache (external; site-specific path via TREEPEX_TILE_CACHE_ROOT)
 # Not stored in repo. Document acquisition in docs/.
 
+# External feature CSVs (V4 H3 per-net top-K aggressor; 134 MB for ASAP7).
+# Generate locally via archive/pex_v4/scripts/29_extract_new_features.py
+# or set TREEPEX_ASAP7_V4_NEW_FEATS / TREEPEX_INTEL22_V4_NEW_FEATS env vars.
+inputs/*
+
 # Editor / OS
 .DS_Store
 .vscode/
