@@ -1,0 +1,3714 @@
+##################
+##ICF rev0, rdua1#
+##################
+
+VERSION 5.8 ;
+
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+UNITS
+ DATABASE MICRONS 2000 ;
+END UNITS
+MANUFACTURINGGRID 0.0005 ;
+
+#PROPERTYDEFINITIONS
+# LAYER techCstId STRING ;
+# LAYER sheetResistance REAL ;
+# LAYER LEF58_TYPE STRING ;
+# LAYER LEF58_ENCLOSURE STRING ;
+# LAYER LEF58_CUTCLASS STRING ;
+# LAYER LEF58_SPACINGTABLE STRING ;
+# LAYER LEF58_WIDTH STRING ;
+# LAYER LEF58_MINWIDTH STRING ;
+# LAYER LEF58_WIDTHTABLE STRING ;
+# LAYER LEF58_EOLKEEPOUT STRING ;
+# LAYER LEF58_EOLEXTENSIONSPACING STRING ;
+# LAYER LEF58_OPPOSITEEOLSPACING STRING ;
+# LAYER LEF58_SPACING STRING ;
+# LAYER LEF58_FILLTOFILLSPACING STRING ;
+# LAYER LEF58_CORNERSPACING STRING ;
+# LAYER LEF58_FORBIDDENSPACING STRING ;
+# LAYER LEF58_RECTONLY STRING ;
+# LAYER LEF58_AREA STRING ;
+#END PROPERTYDEFINITIONS
+
+###########################
+# Define all LAYERS
+###########################
+LAYER OVERLAP
+ TYPE OVERLAP ;
+END OVERLAP
+
+LAYER OverlapCheck
+ TYPE OVERLAP ;
+END OverlapCheck
+
+LAYER DiffGridCheck
+ TYPE MASTERSLICE ;
+END DiffGridCheck
+
+LAYER deepnwell
+ TYPE MASTERSLICE ;
+ PROPERTY LEF58_TYPE "TYPE NWELL ;" ;
+END deepnwell
+
+LAYER nwell
+ TYPE MASTERSLICE ;
+ PROPERTY LEF58_TYPE "TYPE NWELL ;" ;
+END nwell
+
+LAYER ndiff
+ TYPE MASTERSLICE ;
+END ndiff
+
+LAYER pdiff
+ TYPE MASTERSLICE ;
+END pdiff
+
+LAYER poly
+ TYPE MASTERSLICE ;
+END poly
+
+LAYER ce1
+ TYPE MASTERSLICE ;
+END ce1
+
+LAYER ce2
+ TYPE MASTERSLICE ;
+END ce2
+
+LAYER eoa
+ TYPE MASTERSLICE ;
+END eoa
+
+LAYER esd_id
+TYPE MASTERSLICE ;
+END esd_id
+
+LAYER LATCHUP_ZONE_D
+TYPE MASTERSLICE ;
+END LATCHUP_ZONE_D
+
+LAYER LATCHUP_ZONE_E
+TYPE MASTERSLICE ;
+END LATCHUP_ZONE_E
+
+LAYER DiffGridCheck
+ TYPE MASTERSLICE ;
+END DiffGridCheck
+
+LAYER PolyGridCheck
+ TYPE MASTERSLICE ;
+END PolyGridCheck
+
+LAYER dummy81
+ TYPE MASTERSLICE ;
+END dummy81
+
+LAYER dummy82
+ TYPE MASTERSLICE ;
+END dummy82
+
+LAYER gcn
+ TYPE MASTERSLICE ;
+END gcn
+
+LAYER tcn
+ TYPE MASTERSLICE ;
+END tcn
+
+LAYER v0
+  TYPE CUT ;
+  SPACING 0.054 ; # V0_24 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via0_T_64x44 WIDTH 0.044 LENGTH 0.064 ;
+   CUTCLASS Via0_T_68x44S WIDTH 0.044 LENGTH 0.068 ;
+ " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via0_T_64x44 BELOW END -0.013 SIDE 0.003 ;
+   ENCLOSURE CUTCLASS Via0_T_64x44 ABOVE END 0.002 SIDE 0.02 ;
+   ENCLOSURE CUTCLASS Via0_T_68x44S BELOW END -0.015 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via0_T_68x44S ABOVE END 0.0 SIDE 0.0 ;
+ " ;
+
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.054  
+#   CUTCLASS           Via0_T_64x44 SIDE Via0_T_64x44 END Via0_T_68x44S SIDE Via0_T_68x44S END
+#   Via0_T_64x44 SIDE  V0_24 V0_25       - -              V0_24 V0_25        - -              
+#   Via0_T_64x44 END   - -               V0_24 -          - -                V0_24 -          
+#   Via0_T_68x44S SIDE V0_24 V0_25       - -              V0_24 V0_25        - -              
+#   Via0_T_68x44S END  - -               V0_24 -          - -                V0_24 -          # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.054  
+   CUTCLASS           Via0_T_64x44 SIDE Via0_T_64x44 END Via0_T_68x44S SIDE Via0_T_68x44S END
+   Via0_T_64x44 SIDE  - 0.084           - -              - 0.084            - -              
+   Via0_T_64x44 END   - -               - -              - -                - -              
+   Via0_T_68x44S SIDE - 0.084           - -              - 0.084            - -              
+   Via0_T_68x44S END  - -               - -              - -                - -               ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.054 SAMEMETAL 
+#   CUTCLASS           Via0_T_64x44 SIDE Via0_T_64x44 END Via0_T_68x44S SIDE Via0_T_68x44S END
+#   Via0_T_64x44 SIDE  V0_24 V0_25       - -              V0_24 V0_25        - -              
+#   Via0_T_64x44 END   - -               V0_24 -          - -                V0_24 -          
+#   Via0_T_68x44S SIDE V0_24 V0_25       - -              V0_24 V0_25        - -              
+#   Via0_T_68x44S END  - -               V0_24 -          - -                V0_24 -          # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.054 SAMEMETAL 
+   CUTCLASS           Via0_T_64x44 SIDE Via0_T_64x44 END Via0_T_68x44S SIDE Via0_T_68x44S END
+   Via0_T_64x44 SIDE  - 0.084           - -              - 0.084            - -              
+   Via0_T_64x44 END   - -               - -              - -                - -              
+   Via0_T_68x44S SIDE - 0.084           - -              - 0.084            - -              
+   Via0_T_68x44S END  - -               - -              - -                - -               ;
+ " ;
+  ANTENNAAREARATIO 9.000 ; # IPN_301 ;
+
+END v0
+
+LAYER m1
+  TYPE ROUTING ;
+  DIRECTION VERTICAL ;
+  PITCH 0.108 ; # calculated ;
+  WIDTH 0.068 ; # M1_02 ;
+  MINWIDTH 0.044 ; # Changed from .068(M1_02) to OGD width 0.044 ;
+  MAXWIDTH 0.1 ;
+  SPACING 0.040 ; # M1_31 ;
+ ##################################################
+ # Width Based Spacing Table
+ ##################################################
+ PROPERTY LEF58_SPACINGTABLE "
+  SPACINGTABLE TWOWIDTHS
+   WIDTH  0.000    0.040 0.050
+   WIDTH  0.068    0.050 0.050
+ ; " ;
+
+  AREA 0.008160 ;
+  PROPERTY LEF58_AREA
+  "AREA 0.005280 RECTWIDTH 0.044 ;
+  AREA 0.008160 RECTWIDTH 0.068 ;
+  AREA 0.0120000 RECTWIDTH 0.100 ;
+  " ;
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 0.044 0.068 0.1 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.101 EXTENSION 0.000 0.010 0.046 CLASS M1_E2E CORNERONLY ; " ;
+  PROPERTY LEF58_EOLEXTENSIONSPACING "EOLEXTENSIONSPACING 0.056 PARALLELONLY ENDOFLINE 0.101 EXTENSION 0.000 ; " ; # M1_80
+
+  ANTENNAAREARATIO 5000.000 ; # IPN_02 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+
+END m1
+
+LAYER v1
+  TYPE CUT ;
+  SPACING 0.046 ; # V1_23 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via1_60Sx44 WIDTH 0.044 LENGTH 0.06 ;
+   CUTCLASS Via1_60Sx56 WIDTH 0.056 LENGTH 0.06 ;
+   CUTCLASS Via1_60Sx76 WIDTH 0.06 LENGTH 0.076 ;
+   CUTCLASS Via1_60Sx90 WIDTH 0.06 LENGTH 0.09 ;
+   CUTCLASS Via1_60Sx108 WIDTH 0.06 LENGTH 0.108 ;
+   CUTCLASS Via1_70x70 WIDTH 0.07 ;
+ " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via1_60Sx44 BELOW END 0.004 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via1_60Sx44 ABOVE END 0.022 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via1_60Sx56 BELOW END 0.004 SIDE 0.01 ;
+   ENCLOSURE CUTCLASS Via1_60Sx56 ABOVE END 0.022 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via1_60Sx76 BELOW END 0.01 SIDE 0.004 ;
+   ENCLOSURE CUTCLASS Via1_60Sx76 ABOVE END 0.0 SIDE 0.022 ;
+   ENCLOSURE CUTCLASS Via1_60Sx90 BELOW END 0.005 SIDE 0.004 ;
+   ENCLOSURE CUTCLASS Via1_60Sx90 ABOVE END 0.0 SIDE 0.022 ;
+   ENCLOSURE CUTCLASS Via1_60Sx108 BELOW END -0.004 SIDE 0.004 ;
+   ENCLOSURE CUTCLASS Via1_60Sx108 ABOVE END 0.0 SIDE 0.022 ;
+   ENCLOSURE CUTCLASS Via1_70x70 BELOW 0.01 0.01 ;
+   ENCLOSURE CUTCLASS Via1_70x70 ABOVE 0.003 0.01 ;
+ " ;
+
+#V1_32: v1-v0 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 LAYER v0
+   CUTCLASS          Via1_60Sx44 SIDE Via1_60Sx44 END Via1_60Sx56 SIDE Via1_60Sx56 END Via1_60Sx76 SIDE Via1_60Sx76 END Via1_60Sx90 SIDE Via1_60Sx90 END Via1_60Sx108 SIDE Via1_60Sx108 END Via1_70x70 SIDE Via1_70x70 END
+   Via0_T_64x44 SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_64x44 END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_68x44S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_68x44S END - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+ ; " ;
+
+#V1_32: v1-v0 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 SAMENET LAYER v0
+   CUTCLASS          Via1_60Sx44 SIDE Via1_60Sx44 END Via1_60Sx56 SIDE Via1_60Sx56 END Via1_60Sx76 SIDE Via1_60Sx76 END Via1_60Sx90 SIDE Via1_60Sx90 END Via1_60Sx108 SIDE Via1_60Sx108 END Via1_70x70 SIDE Via1_70x70 END
+   Via0_T_64x44 SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_64x44 END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_68x44S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_68x44S END - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+ ; " ;
+
+#V1_32: v1-v0 space is 0.0 on same metal
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.000 SAMEMETAL LAYER v0
+   CUTCLASS          Via1_60Sx44 SIDE Via1_60Sx44 END Via1_60Sx56 SIDE Via1_60Sx56 END Via1_60Sx76 SIDE Via1_60Sx76 END Via1_60Sx90 SIDE Via1_60Sx90 END Via1_60Sx108 SIDE Via1_60Sx108 END Via1_70x70 SIDE Via1_70x70 END
+   Via0_T_64x44 SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_64x44 END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_68x44S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via0_T_68x44S END - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+ ; " ;
+
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.066  
+#   CUTCLASS          Via1_60Sx44 SIDE Via1_60Sx44 END Via1_60Sx56 SIDE Via1_60Sx56 END Via1_60Sx76 SIDE Via1_60Sx76 END Via1_60Sx90 SIDE Via1_60Sx90 END Via1_60Sx108 SIDE Via1_60Sx108 END Via1_70x70
+#   Via1_60Sx44 SIDE  V1_24 V1_28      - -             V1_24 V1_28      - -             - -              V1_24 V1_28     - -              V1_24 V1_28     - -               V1_24 V1_28      V1_24 V1_28
+#   Via1_60Sx44 END   - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              V1_24 V1_28
+#   Via1_60Sx56 SIDE  V1_24 V1_28      - -             V1_24 V1_28      - -             - -              V1_24 V1_28     - -              V1_24 V1_28     - -               V1_24 V1_28      V1_24 V1_28
+#   Via1_60Sx56 END   - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              V1_24 V1_28
+#   Via1_60Sx76 SIDE  - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              - -       
+#   Via1_60Sx76 END   V1_24 V1_28      - -             V1_24 V1_28      - -             - -              V1_24 V1_28     - -              V1_24 V1_28     - -               V1_24 V1_28      - -       
+#   Via1_60Sx90 SIDE  - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              - -       
+#   Via1_60Sx90 END   V1_24 V1_28      - -             V1_24 V1_28      - -             - -              V1_24 V1_28     - -              V1_24 V1_28     - -               V1_24 V1_28      - -       
+#   Via1_60Sx108 SIDE - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              - -       
+#   Via1_60Sx108 END  V1_24 V1_28      - -             V1_24 V1_28      - -             - -              V1_24 V1_28     - -              V1_24 V1_28     - -               V1_24 V1_28      - -       
+#   Via1_70x70        V1_24 V1_28      V1_24 V1_28     V1_24 V1_28      V1_24 V1_28     - -              - -             - -              - -             - -               - -              V1_24 V1_28# ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.066  
+   CUTCLASS          Via1_60Sx44 SIDE Via1_60Sx44 END Via1_60Sx56 SIDE Via1_60Sx56 END Via1_60Sx76 SIDE Via1_60Sx76 END Via1_60Sx90 SIDE Via1_60Sx90 END Via1_60Sx108 SIDE Via1_60Sx108 END Via1_70x70
+   Via1_60Sx44 SIDE  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136   
+   Via1_60Sx44 END   - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156   
+   Via1_60Sx56 SIDE  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136   
+   Via1_60Sx56 END   - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156   
+   Via1_60Sx76 SIDE  - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156          
+   Via1_60Sx76 END   - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136          
+   Via1_60Sx90 SIDE  - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156          
+   Via1_60Sx90 END   - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136          
+   Via1_60Sx108 SIDE - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156          
+   Via1_60Sx108 END  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136          
+   Via1_70x70        - 0.136          - 0.156         - 0.136          - 0.156         - 0.156          - 0.136         - 0.156          - 0.136         - 0.156           - 0.136          - 0.156    ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.066 SAMEMETAL 
+#   CUTCLASS          Via1_60Sx44 SIDE Via1_60Sx44 END Via1_60Sx56 SIDE Via1_60Sx56 END Via1_60Sx76 SIDE Via1_60Sx76 END Via1_60Sx90 SIDE Via1_60Sx90 END Via1_60Sx108 SIDE Via1_60Sx108 END Via1_70x70
+#   Via1_60Sx44 SIDE  V1_24 V1_23      - -             V1_24 V1_128     - -             - -              V1_24 V1_128    - -              V1_24 V1_128    - -               V1_24 V1_128     V1_24 V1_128
+#   Via1_60Sx44 END   - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              V1_24 V1_28
+#   Via1_60Sx56 SIDE  V1_24 V1_128     - -             V1_24 V1_23      - -             - -              V1_24 V1_128    - -              V1_24 V1_128    - -               V1_24 V1_128     V1_24 V1_128
+#   Via1_60Sx56 END   - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              V1_24 V1_28
+#   Via1_60Sx76 SIDE  - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              - -       
+#   Via1_60Sx76 END   V1_24 V1_128     - -             V1_24 V1_128     - -             - -              V1_24 V1_23     - -              V1_24 V1_128    - -               V1_24 V1_128     - -       
+#   Via1_60Sx90 SIDE  - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              - -       
+#   Via1_60Sx90 END   V1_24 V1_128     - -             V1_24 V1_128     - -             - -              V1_24 V1_128    - -              V1_24 V1_23     - -               V1_24 V1_128     - -       
+#   Via1_60Sx108 SIDE - -              V1_24 V1_28     - -              V1_24 V1_28     V1_24 V1_28      - -             V1_24 V1_28      - -             V1_24 V1_28       - -              - -       
+#   Via1_60Sx108 END  V1_24 V1_128     - -             V1_24 V1_128     - -             - -              V1_24 V1_128    - -              V1_24 V1_128    - -               V1_24 V1_23      - -       
+#   Via1_70x70        V1_24 V1_128     V1_24 V1_28     V1_24 V1_128     V1_24 V1_28     - -              - -             - -              - -             - -               - -              V1_24 V1_28# ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.066 SAMEMETAL 
+   CUTCLASS          Via1_60Sx44 SIDE Via1_60Sx44 END Via1_60Sx56 SIDE Via1_60Sx56 END Via1_60Sx76 SIDE Via1_60Sx76 END Via1_60Sx90 SIDE Via1_60Sx90 END Via1_60Sx108 SIDE Via1_60Sx108 END Via1_70x70
+   Via1_60Sx44 SIDE  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136   
+   Via1_60Sx44 END   - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156   
+   Via1_60Sx56 SIDE  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136   
+   Via1_60Sx56 END   - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156   
+   Via1_60Sx76 SIDE  - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156          
+   Via1_60Sx76 END   - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136          
+   Via1_60Sx90 SIDE  - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156          
+   Via1_60Sx90 END   - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136          
+   Via1_60Sx108 SIDE - -              - 0.156         - -              - 0.156         - 0.156          - -             - 0.156          - -             - 0.156           - -              - 0.156          
+   Via1_60Sx108 END  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - 0.136          
+   Via1_70x70        - 0.136          - 0.156         - 0.136          - 0.156         - 0.156          - 0.136         - 0.156          - 0.136         - 0.156           - 0.136          - 0.156    ;
+ " ;
+
+ # FORBIDDEN SPACING to avoid spaces between Vx_23 and Vx_128 on Self Aligned Edges
+ # Relevant to Vias where certain offgrid offset spacing for M2 wires will not be allowed if Via spacing falls in Forbidden region
+  PROPERTY LEF58_FORBIDDENSPACING "
+   FORBIDDENSPACING CUTCLASS Via1_60Sx44 0.061 0.135 LONGEDGEONLY PRL -0.002 TO Via1_60Sx44 -0.002 TO Via1_60Sx56 -0.002 TO Via1_60Sx76 -0.002 TO Via1_60Sx90 -0.002 TO Via1_60Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via1_60Sx56 0.061 0.135 LONGEDGEONLY PRL -0.002 TO Via1_60Sx44 -0.002 TO Via1_60Sx56 -0.002 TO Via1_60Sx76 -0.002 TO Via1_60Sx90 -0.002 TO Via1_60Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via1_60Sx76 0.061 0.135 SHORTEDGEONLY PRL -0.002 TO Via1_60Sx44 -0.002 TO Via1_60Sx56 -0.002 TO Via1_60Sx76 -0.002 TO Via1_60Sx90 -0.002 TO Via1_60Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via1_60Sx90 0.061 0.135 SHORTEDGEONLY PRL -0.002 TO Via1_60Sx44 -0.002 TO Via1_60Sx56 -0.002 TO Via1_60Sx76 -0.002 TO Via1_60Sx90 -0.002 TO Via1_60Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via1_60Sx108 0.061 0.135 SHORTEDGEONLY PRL -0.002 TO Via1_60Sx44 -0.002 TO Via1_60Sx56 -0.002 TO Via1_60Sx76 -0.002 TO Via1_60Sx90 -0.002 TO Via1_60Sx108 ;
+ " ;
+
+  ANTENNAAREARATIO 360.000 ; # IPN_302 ;
+
+END v1
+
+LAYER m2
+  TYPE ROUTING ;
+  DIRECTION HORIZONTAL ;
+  PITCH 0.090 ; # calculated ;
+  WIDTH 0.044 ; # M2_01 ;
+  MINWIDTH 0.044 ; # M2_01 ;
+  MAXWIDTH 0.108 ;
+  SPACING 0.046 ; # M2_24 ;
+ ##################################################
+ # Width Based Spacing Table
+ ##################################################
+ PROPERTY LEF58_SPACINGTABLE "
+  SPACINGTABLE TWOWIDTHS
+   WIDTH  0.000    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.044    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.056    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.076    0.046 0.046 0.046 0.060 0.060
+   WIDTH  0.090    0.046 0.046 0.046 0.060 0.060
+ ; " ;
+
+  AREA 0.007040 ;
+  PROPERTY LEF58_AREA
+  "AREA 0.007040 RECTWIDTH 0.044 ;
+  AREA 0.008960 RECTWIDTH 0.056 ;
+  AREA 0.0121600 RECTWIDTH 0.076 ;
+  AREA 0.0144000 RECTWIDTH 0.090 ;
+  AREA 0.0172800 RECTWIDTH 0.108 ;
+  " ;
+
+
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 0.044 0.056 0.076 0.09 0.108 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.109 EXTENSION 0.000 0.010 0.08 CLASS M2_E2E CORNERONLY ; " ; # M2_41
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.057 EXTENSION 0.000 0.014 0.100 EXCEPTWITHIN -0.010 -0.001 CLASS M2_C2C ; " ; # M2_47
+  PROPERTY LEF58_EOLEXTENSIONSPACING "EOLEXTENSIONSPACING 0.056 PARALLELONLY ENDOFLINE 0.109 EXTENSION 0.000 ; " ; # M2_80
+  #PROPERTY LEF58_CORNERSPACING "CORNERSPACING CONVEXCORNER CORNERONLY 0.056  WIDTH 0.000 SPACING 0.032 ; " ; # M2_80 - WW34
+  ANTENNAAREARATIO 5000.000 ; # IPN_03 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+END m2
+
+LAYER v2
+  TYPE CUT ;
+  SPACING 0.046 ; # V2_23 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via2_44x58S WIDTH 0.044 LENGTH 0.058 ;
+   CUTCLASS Via2_56x58S WIDTH 0.056 LENGTH 0.058 ;
+   CUTCLASS Via2_70x70 WIDTH 0.07 ;
+   CUTCLASS Via2_76x58S WIDTH 0.058 LENGTH 0.076 ;
+   CUTCLASS Via2_90x58S WIDTH 0.058 LENGTH 0.09 ;
+   CUTCLASS Via2_108x58S WIDTH 0.058 LENGTH 0.108 ;
+ " ;
+
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via2_44x58S BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via2_44x58S ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via2_56x58S BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via2_56x58S ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via2_70x70 BELOW 0.003 -0.007 ;
+   ENCLOSURE CUTCLASS Via2_70x70 ABOVE 0.01 -0.007 ;
+   ENCLOSURE CUTCLASS Via2_76x58S BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via2_76x58S ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via2_90x58S BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via2_90x58S ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via2_108x58S BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via2_108x58S ABOVE END 0.0 SIDE 0.021 ;
+ " ;
+
+#V2_32: v2-v1 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 LAYER v1
+   CUTCLASS          Via2_44x58S SIDE Via2_44x58S END Via2_56x58S SIDE Via2_56x58S END Via2_70x70 SIDE Via2_70x70 END Via2_76x58S SIDE Via2_76x58S END Via2_90x58S SIDE Via2_90x58S END Via2_108x58S SIDE Via2_108x58S END
+   Via1_60Sx44 SIDE  - 0.08           - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx44 END   - -              - 0.08          - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx56 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx56 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx76 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx76 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx90 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx90 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx108 SIDE - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx108 END  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_70x70 SIDE   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_70x70 END    - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+ ; " ;
+
+#V2_32: v2-v1 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 SAMENET LAYER v1
+   CUTCLASS          Via2_44x58S SIDE Via2_44x58S END Via2_56x58S SIDE Via2_56x58S END Via2_70x70 SIDE Via2_70x70 END Via2_76x58S SIDE Via2_76x58S END Via2_90x58S SIDE Via2_90x58S END Via2_108x58S SIDE Via2_108x58S END
+   Via1_60Sx44 SIDE  - 0.08           - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx44 END   - -              - 0.08          - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx56 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx56 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx76 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx76 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx90 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx90 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx108 SIDE - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx108 END  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_70x70 SIDE   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_70x70 END    - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+ ; " ;
+
+
+#V2_32: v2-v1 space is 0.0 on same metal
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.000 SAMEMETAL LAYER v1
+   CUTCLASS          Via2_44x58S SIDE Via2_44x58S END Via2_56x58S SIDE Via2_56x58S END Via2_70x70 SIDE Via2_70x70 END Via2_76x58S SIDE Via2_76x58S END Via2_90x58S SIDE Via2_90x58S END Via2_108x58S SIDE Via2_108x58S END
+   Via1_60Sx44 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx44 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx56 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx56 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx76 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx76 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx90 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx90 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx108 SIDE - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_60Sx108 END  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_70x70 SIDE   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+   Via1_70x70 END    - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -               - -             
+ ; " ;
+
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056  
+#   CUTCLASS          Via2_44x58S SIDE Via2_44x58S END Via2_56x58S SIDE Via2_56x58S END Via2_70x70 Via2_76x58S SIDE Via2_76x58S END Via2_90x58S SIDE Via2_90x58S END Via2_108x58S SIDE Via2_108x58S END
+#   Via2_44x58S SIDE  V2_24 V2_28      - -             V2_24 V2_28      - -             - -        - -              V2_24 V2_28     - -              V2_24 V2_28     - -               V2_24 V2_28     
+#   Via2_44x58S END   - -              V2_24 V2_28     - -              V2_24 V2_28     - -        V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_56x58S SIDE  V2_24 V2_28      - -             V2_24 V2_28      - -             - -        - -              V2_24 V2_28     - -              V2_24 V2_28     - -               V2_24 V2_28     
+#   Via2_56x58S END   - -              V2_24 V2_28     - -              V2_24 V2_28     - -        V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_70x70        - -              - -             - -              - -             V2_24 V2_28 V2_24 V2_28      V2_24 V2_28     V2_24 V2_28      V2_24 V2_28     V2_24 V2_28       V2_24 V2_28     
+#   Via2_76x58S SIDE  - -              V2_24 V2_28     - -              V2_24 V2_28     V2_24 V2_28 V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_76x58S END   V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28 - -              V2_24 V2_28     - -              V2_24 V2_28     - -               V2_24 V2_28     
+#   Via2_90x58S SIDE  - -              V2_24 V2_28     - -              V2_24 V2_28     V2_24 V2_28 V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_90x58S END   V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28 - -              V2_24 V2_28     - -              V2_24 V2_28     - -               V2_24 V2_28     
+#   Via2_108x58S SIDE - -              V2_24 V2_28     - -              V2_24 V2_28     V2_24 V2_28 V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_108x58S END  V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28 - -              V2_24 V2_28     - -              V2_24 V2_28     - -               V2_24 V2_28     # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056  
+   CUTCLASS          Via2_44x58S SIDE Via2_44x58S END Via2_56x58S SIDE Via2_56x58S END Via2_70x70 Via2_76x58S SIDE Via2_76x58S END Via2_90x58S SIDE Via2_90x58S END Via2_108x58S SIDE Via2_108x58S END
+   Via2_44x58S SIDE  - 0.12            - -             - 0.12            - -             - 0.12        - -              - 0.12           - -              - 0.12           - -               - 0.12           
+   Via2_44x58S END   - -              - 0.1           - -              - 0.1           - 0.1        - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_56x58S SIDE  - 0.12            - -             - 0.12            - -             - 0.12        - -              - 0.12           - -              - 0.12           - -               - 0.12           
+   Via2_56x58S END   - -              - 0.1           - -              - 0.1           - 0.1        - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_70x70        - 0.12          - 0.1             - 0.12          - 0.1             - 0.11      - 0.1            - 0.1           - 0.1            - 0.1           - 0.1             - 0.1           
+   Via2_76x58S SIDE  - -              - 0.1           - -              - 0.1           - 0.1      - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_76x58S END   - 0.12            - -             - 0.12            - -             - 0.1      - -              - 0.12           - -              - 0.12           - -               - 0.12           
+   Via2_90x58S SIDE  - -              - 0.1           - -              - 0.1           - 0.1      - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_90x58S END   - 0.12            - -             - 0.12            - -             - 0.1      - -              - 0.12           - -              - 0.12           - -               - 0.12           
+   Via2_108x58S SIDE - -              - 0.1           - -              - 0.1           - 0.1      - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_108x58S END  - 0.12            - -             - 0.12            - -             - 0.1      - -              - 0.12           - -              - 0.12           - -               - 0.12            ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+#   CUTCLASS          Via2_44x58S SIDE Via2_44x58S END Via2_56x58S SIDE Via2_56x58S END Via2_70x70 Via2_76x58S SIDE Via2_76x58S END Via2_90x58S SIDE Via2_90x58S END Via2_108x58S SIDE Via2_108x58S END
+#   Via2_44x58S SIDE  V2_24 V2_23      - -             V2_24 V2_23      - -             - -        - -              V2_24 V2_23     - -              V2_24 V2_23     - -               V2_24 V2_23     
+#   Via2_44x58S END   - -              V2_24 V2_28     - -              V2_24 V2_28     - -        V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_56x58S SIDE  V2_24 V2_23      - -             V2_24 V2_23      - -             - -        - -              V2_24 V2_23     - -              V2_24 V2_23     - -               V2_24 V2_23     
+#   Via2_56x58S END   - -              V2_24 V2_28     - -              V2_24 V2_28     - -        V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_70x70        - -              - -             - -              - -             V2_24 V2_28 V2_24 V2_28      V2_24 V2_128    V2_24 V2_28      V2_24 V2_128    V2_24 V2_28       V2_24 V2_128    
+#   Via2_76x58S SIDE  - -              V2_24 V2_28     - -              V2_24 V2_28     V2_24 V2_28 V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_76x58S END   V2_24 V2_23      - -             V2_24 V2_23      - -             V2_24 V2_128 - -              V2_24 V2_23     - -              V2_24 V2_23     - -               V2_24 V2_23     
+#   Via2_90x58S SIDE  - -              V2_24 V2_28     - -              V2_24 V2_28     V2_24 V2_28 V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_90x58S END   V2_24 V2_23      - -             V2_24 V2_23      - -             V2_24 V2_128 - -              V2_24 V2_23     - -              V2_24 V2_23     - -               V2_24 V2_23     
+#   Via2_108x58S SIDE - -              V2_24 V2_28     - -              V2_24 V2_28     V2_24 V2_28 V2_24 V2_28      - -             V2_24 V2_28      - -             V2_24 V2_28       - -             
+#   Via2_108x58S END  V2_24 V2_23      - -             V2_24 V2_23      - -             V2_24 V2_128 - -              V2_24 V2_23     - -              V2_24 V2_23     - -               V2_24 V2_23     # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+   CUTCLASS          Via2_44x58S SIDE Via2_44x58S END Via2_56x58S SIDE Via2_56x58S END Via2_70x70 Via2_76x58S SIDE Via2_76x58S END Via2_90x58S SIDE Via2_90x58S END Via2_108x58S SIDE Via2_108x58S END
+   Via2_44x58S SIDE  - 0.046          - -             - 0.046          - -             - 0.12        - -              - 0.046         - -              - 0.046         - -               - 0.046         
+   Via2_44x58S END   - -              - 0.1           - -              - 0.1           - 0.1        - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_56x58S SIDE  - 0.046          - -             - 0.046          - -             - 0.12        - -              - 0.046         - -              - 0.046         - -               - 0.046         
+   Via2_56x58S END   - -              - 0.1           - -              - 0.1           - 0.1        - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_70x70        - 0.12           - 0.1           - 0.12           - 0.1          - 0.11      - 0.1            - 0.12          - 0.1            - 0.12          - 0.1             - 0.12          
+   Via2_76x58S SIDE  - -              - 0.1           - -              - 0.1           - 0.1      - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_76x58S END   - 0.046          - -             - 0.046          - -             - 0.12     - -              - 0.046         - -              - 0.046         - -               - 0.046         
+   Via2_90x58S SIDE  - -              - 0.1           - -              - 0.1           - 0.1      - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_90x58S END   - 0.046          - -             - 0.046          - -             - 0.12     - -              - 0.046         - -              - 0.046         - -               - 0.046         
+   Via2_108x58S SIDE - -              - 0.1           - -              - 0.1           - 0.1      - 0.1            - -             - 0.1            - -             - 0.1             - -             
+   Via2_108x58S END  - 0.046          - -             - 0.046          - -             - 0.12     - -              - 0.046         - -              - 0.046         - -               - 0.046          ;
+ " ;
+
+ # FORBIDDEN SPACING to avoid spaces between Vx_23 and Vx_128 on Self Aligned Edges
+ # Relevant to Vias where certain offgrid offset spacing for M3 wires will not be allowed if Via spacing falls in Forbidden region
+  PROPERTY LEF58_FORBIDDENSPACING "
+   FORBIDDENSPACING CUTCLASS Via2_44x58S 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via2_44x58S -0.002 TO Via2_56x58S -0.002 TO Via2_76x58S -0.002 TO Via2_90x58S -0.002 TO Via2_108x58S ;
+   FORBIDDENSPACING CUTCLASS Via2_56x58S 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via2_44x58S -0.002 TO Via2_56x58S -0.002 TO Via2_76x58S -0.002 TO Via2_90x58S -0.002 TO Via2_108x58S ;
+   FORBIDDENSPACING CUTCLASS Via2_76x58S 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via2_44x58S -0.002 TO Via2_56x58S -0.002 TO Via2_76x58S -0.002 TO Via2_90x58S -0.002 TO Via2_108x58S ;
+   FORBIDDENSPACING CUTCLASS Via2_90x58S 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via2_44x58S -0.002 TO Via2_56x58S -0.002 TO Via2_76x58S -0.002 TO Via2_90x58S -0.002 TO Via2_108x58S ;
+   FORBIDDENSPACING CUTCLASS Via2_108x58S 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via2_44x58S -0.002 TO Via2_56x58S -0.002 TO Via2_76x58S -0.002 TO Via2_90x58S -0.002 TO Via2_108x58S ;
+ " ;
+
+  ANTENNAAREARATIO 360.000 ; # IPN_303 ;
+
+END v2
+
+LAYER m3
+  TYPE ROUTING ;
+  DIRECTION VERTICAL ;
+  PITCH 0.090 ; # calculated ;
+  WIDTH 0.044 ; # M3_01 ;
+  MINWIDTH 0.044 ; # M3_01 ;
+  MAXWIDTH 0.108 ;
+  SPACING 0.046 ; # M3_24 ;
+ ##################################################
+ # Width Based Spacing Table
+ ##################################################
+ PROPERTY LEF58_SPACINGTABLE "
+  SPACINGTABLE TWOWIDTHS
+   WIDTH  0.000    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.044    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.056    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.076    0.046 0.046 0.046 0.060 0.060
+   WIDTH  0.090    0.046 0.046 0.046 0.060 0.060
+ ; " ;
+
+  AREA 0.007040 ;
+  PROPERTY LEF58_AREA
+  "AREA 0.007040 RECTWIDTH 0.044 ;
+  AREA 0.008960 RECTWIDTH 0.056 ;
+  AREA 0.0121600 RECTWIDTH 0.076 ;
+  AREA 0.0144000 RECTWIDTH 0.090 ;
+  AREA 0.0172800 RECTWIDTH 0.108 ;
+  " ;
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 0.044 0.056 0.076 0.09 0.108 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.109 EXTENSION 0.000 0.010 0.08 CLASS M3_E2E CORNERONLY ; " ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.057 EXTENSION 0.000 0.014 0.100 EXCEPTWITHIN -0.010 -0.001 CLASS M3_C2C ; " ; # M3_47
+  PROPERTY LEF58_EOLEXTENSIONSPACING "EOLEXTENSIONSPACING 0.056 PARALLELONLY ENDOFLINE 0.109 EXTENSION 0.000 ; " ; # M3_80
+  #PROPERTY LEF58_CORNERSPACING "CORNERSPACING CONVEXCORNER CORNERONLY 0.056  WIDTH 0.000 SPACING 0.032 ; " ; # M3_80 - WW34
+  ANTENNAAREARATIO 5000.000 ; # IPN_04 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+
+END m3
+
+LAYER v3
+  TYPE CUT ;
+  SPACING 0.046 ; # V3_23 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via3_58Sx44 WIDTH 0.044 LENGTH 0.058 ;
+   CUTCLASS Via3_58Sx56 WIDTH 0.056 LENGTH 0.058 ;
+   CUTCLASS Via3_58Sx76 WIDTH 0.058 LENGTH 0.076 ;
+   CUTCLASS Via3_58Sx90 WIDTH 0.058 LENGTH 0.09 ;
+   CUTCLASS Via3_58Sx108 WIDTH 0.058 LENGTH 0.108 ;
+   CUTCLASS Via3_70x70 WIDTH 0.07 ;
+ " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via3_58Sx44 BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via3_58Sx44 ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via3_58Sx56 BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via3_58Sx56 ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via3_58Sx76 BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via3_58Sx76 ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via3_58Sx90 BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via3_58Sx90 ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via3_58Sx108 BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via3_58Sx108 ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via3_70x70 BELOW -0.007 0.003 ;
+   ENCLOSURE CUTCLASS Via3_70x70 ABOVE 0.01 0.003 ;
+ " ;
+
+#V3_32: v3-v2 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 LAYER v2
+   CUTCLASS          Via3_58Sx44 SIDE Via3_58Sx44 END Via3_58Sx56 SIDE Via3_58Sx56 END Via3_58Sx76 SIDE Via3_58Sx76 END Via3_58Sx90 SIDE Via3_58Sx90 END Via3_58Sx108 SIDE Via3_58Sx108 END Via3_70x70 SIDE Via3_70x70 END
+   Via2_44x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_44x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_56x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_56x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_70x70 SIDE   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_70x70 END    - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_76x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_76x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_90x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_90x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_108x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_108x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+ ; " ;
+
+#V3_32: v3-v2 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 SAMENET LAYER v2
+   CUTCLASS          Via3_58Sx44 SIDE Via3_58Sx44 END Via3_58Sx56 SIDE Via3_58Sx56 END Via3_58Sx76 SIDE Via3_58Sx76 END Via3_58Sx90 SIDE Via3_58Sx90 END Via3_58Sx108 SIDE Via3_58Sx108 END Via3_70x70 SIDE Via3_70x70 END
+   Via2_44x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_44x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_56x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_56x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_70x70 SIDE   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_70x70 END    - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_76x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_76x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_90x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_90x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_108x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_108x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+ ; " ;
+
+
+#V3_32: v3-v2 space is 0.000 on same metal
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.000 SAMEMETAL LAYER v2
+   CUTCLASS          Via3_58Sx44 SIDE Via3_58Sx44 END Via3_58Sx56 SIDE Via3_58Sx56 END Via3_58Sx76 SIDE Via3_58Sx76 END Via3_58Sx90 SIDE Via3_58Sx90 END Via3_58Sx108 SIDE Via3_58Sx108 END Via3_70x70 SIDE Via3_70x70 END
+   Via2_44x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_44x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_56x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_56x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_70x70 SIDE   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_70x70 END    - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_76x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_76x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_90x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_90x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_108x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+   Via2_108x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -             - -           
+ ; " ;
+
+
+
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056  
+#   CUTCLASS          Via3_58Sx44 SIDE Via3_58Sx44 END Via3_58Sx56 SIDE Via3_58Sx56 END Via3_58Sx76 SIDE Via3_58Sx76 END Via3_58Sx90 SIDE Via3_58Sx90 END Via3_58Sx108 SIDE Via3_58Sx108 END Via3_70x70
+#   Via3_58Sx44 SIDE  V3_24 V3_28      - -             V3_24 V3_28      - -             - -              V3_24 V3_28     - -              V3_24 V3_28     - -               V3_24 V3_28      V3_24 V3_28
+#   Via3_58Sx44 END   - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              V3_24 V3_28
+#   Via3_58Sx56 SIDE  V3_24 V3_28      - -             V3_24 V3_28      - -             - -              V3_24 V3_28     - -              V3_24 V3_28     - -               V3_24 V3_28      V3_24 V3_28
+#   Via3_58Sx56 END   - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              V3_24 V3_28
+#   Via3_58Sx76 SIDE  - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              - -       
+#   Via3_58Sx76 END   V3_24 V3_28      - -             V3_24 V3_28      - -             - -              V3_24 V3_28     - -              V3_24 V3_28     - -               V3_24 V3_28      - -       
+#   Via3_58Sx90 SIDE  - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              - -       
+#   Via3_58Sx90 END   V3_24 V3_28      - -             V3_24 V3_28      - -             - -              V3_24 V3_28     - -              V3_24 V3_28     - -               V3_24 V3_28      - -       
+#   Via3_58Sx108 SIDE - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              - -       
+#   Via3_58Sx108 END  V3_24 V3_28      - -             V3_24 V3_28      - -             - -              V3_24 V3_28     - -              V3_24 V3_28     - -               V3_24 V3_28      - -       
+#   Via3_70x70        V3_24 V3_28      V3_24 V3_28     V3_24 V3_28      V3_24 V3_28     - -              - -             - -              - -             - -               - -              V3_24 V3_28# ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056  
+   CUTCLASS          Via3_58Sx44 SIDE Via3_58Sx44 END Via3_58Sx56 SIDE Via3_58Sx56 END Via3_58Sx76 SIDE Via3_58Sx76 END Via3_58Sx90 SIDE Via3_58Sx90 END Via3_58Sx108 SIDE Via3_58Sx108 END Via3_70x70
+   Via3_58Sx44 SIDE  - 0.046            - -             - 0.046            - -             - -              - 0.046           - -              - 0.046           - -               - 0.046            - 0.120     
+   Via3_58Sx44 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1     
+   Via3_58Sx56 SIDE  - 0.046            - -             - 0.046            - -             - -              - 0.046           - -              - 0.046           - -               - 0.046            - 0.120     
+   Via3_58Sx56 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1     
+   Via3_58Sx76 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1       
+   Via3_58Sx76 END   - 0.046            - -             - 0.046            - -             - -              - 0.046           - -              - 0.046           - -               - 0.046            - 0.120       
+   Via3_58Sx90 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1       
+   Via3_58Sx90 END   - 0.046            - -             - 0.046            - -             - -              - 0.046           - -              - 0.046           - -               - 0.046            - 0.120       
+   Via3_58Sx108 SIDE - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1       
+   Via3_58Sx108 END  - 0.046            - -             - 0.046            - -             - -              - 0.046           - -              - 0.046           - -               - 0.046            - 0.120       
+   Via3_70x70        - 0.120           - 0.1           - 0.120            - 0.1           - 0.1              - 0.120          - 0.1              - 0.120      - 0.1               - 0.120              - 0.11      ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+#   CUTCLASS          Via3_58Sx44 SIDE Via3_58Sx44 END Via3_58Sx56 SIDE Via3_58Sx56 END Via3_58Sx76 SIDE Via3_58Sx76 END Via3_58Sx90 SIDE Via3_58Sx90 END Via3_58Sx108 SIDE Via3_58Sx108 END Via3_70x70
+#   Via3_58Sx44 SIDE  V3_24 V3_23      - -             V3_24 V3_128     - -             - -              V3_24 V3_128    - -              V3_24 V3_128    - -               V3_24 V3_128     V3_24 V3_128
+#   Via3_58Sx44 END   - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              V3_24 V3_28
+#   Via3_58Sx56 SIDE  V3_24 V3_128     - -             V3_24 V3_23      - -             - -              V3_24 V3_128    - -              V3_24 V3_128    - -               V3_24 V3_128     V3_24 V3_128
+#   Via3_58Sx56 END   - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              V3_24 V3_28
+#   Via3_58Sx76 SIDE  - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              - -       
+#   Via3_58Sx76 END   V3_24 V3_128     - -             V3_24 V3_128     - -             - -              V3_24 V3_23     - -              V3_24 V3_128    - -               V3_24 V3_128     - -       
+#   Via3_58Sx90 SIDE  - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              - -       
+#   Via3_58Sx90 END   V3_24 V3_128     - -             V3_24 V3_128     - -             - -              V3_24 V3_128    - -              V3_24 V3_23     - -               V3_24 V3_128     - -       
+#   Via3_58Sx108 SIDE - -              V3_24 V3_28     - -              V3_24 V3_28     V3_24 V3_28      - -             V3_24 V3_28      - -             V3_24 V3_28       - -              - -       
+#   Via3_58Sx108 END  V3_24 V3_128     - -             V3_24 V3_128     - -             - -              V3_24 V3_128    - -              V3_24 V3_128    - -               V3_24 V3_23      - -       
+#   Via3_70x70        V3_24 V3_128     V3_24 V3_28     V3_24 V3_128     V3_24 V3_28     - -              - -             - -              - -             - -               - -              V3_24 V3_28# ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+   CUTCLASS          Via3_58Sx44 SIDE Via3_58Sx44 END Via3_58Sx56 SIDE Via3_58Sx56 END Via3_58Sx76 SIDE Via3_58Sx76 END Via3_58Sx90 SIDE Via3_58Sx90 END Via3_58Sx108 SIDE Via3_58Sx108 END Via3_70x70
+   Via3_58Sx44 SIDE  - 0.046          - -             - 0.046           - -             - -              - 0.046          - -              - 0.046          - -               - 0.046           - 0.120    
+   Via3_58Sx44 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1     
+   Via3_58Sx56 SIDE  - 0.046           - -             - 0.046          - -             - -              - 0.046          - -              - 0.046          - -               - 0.046           - 0.120    
+   Via3_58Sx56 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1     
+   Via3_58Sx76 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1       
+   Via3_58Sx76 END   - 0.046           - -             - 0.046           - -             - -              - 0.046         - -              - 0.046          - -               - 0.046           - 0.120       
+   Via3_58Sx90 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1       
+   Via3_58Sx90 END   - 0.046           - -             - 0.046           - -             - -              - 0.046          - -              - 0.046         - -               - 0.046           - 0.120       
+   Via3_58Sx108 SIDE - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1       
+   Via3_58Sx108 END  - 0.046           - -             - 0.046           - -             - -              - 0.046          - -              - 0.046          - -               - 0.046          - 0.120       
+   Via3_70x70        - 0.12           - 0.1           - 0.12           - 0.1           - 0.1              - 0.120          - 0.1           - 0.120         - 0.1               - 0.120              - 0.11      ;
+ " ;
+
+ # FORBIDDEN SPACING to avoid spaces between Vx_23 and Vx_128 on Self Aligned Edges
+ # Relevant to Vias where certain offgrid offset spacing for M4 wires will not be allowed if Via spacing falls in Forbidden region
+  PROPERTY LEF58_FORBIDDENSPACING "
+   FORBIDDENSPACING CUTCLASS Via3_58Sx44 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via3_58Sx44 -0.002 TO Via3_58Sx56 -0.002 TO Via3_58Sx76 -0.002 TO Via3_58Sx90 -0.002 TO Via3_58Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via3_58Sx56 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via3_58Sx44 -0.002 TO Via3_58Sx56 -0.002 TO Via3_58Sx76 -0.002 TO Via3_58Sx90 -0.002 TO Via3_58Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via3_58Sx76 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via3_58Sx44 -0.002 TO Via3_58Sx56 -0.002 TO Via3_58Sx76 -0.002 TO Via3_58Sx90 -0.002 TO Via3_58Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via3_58Sx90 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via3_58Sx44 -0.002 TO Via3_58Sx56 -0.002 TO Via3_58Sx76 -0.002 TO Via3_58Sx90 -0.002 TO Via3_58Sx108 ;
+   FORBIDDENSPACING CUTCLASS Via3_58Sx108 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via3_58Sx44 -0.002 TO Via3_58Sx56 -0.002 TO Via3_58Sx76 -0.002 TO Via3_58Sx90 -0.002 TO Via3_58Sx108 ;
+ " ;
+
+  ANTENNAAREARATIO 360.000 ; # IPN_304 ;
+
+END v3
+
+LAYER m4
+  TYPE ROUTING ;
+  DIRECTION HORIZONTAL ;
+  PITCH 0.090 ; # calculated ;
+  WIDTH 0.044 ; # M4_01 ;
+  MINWIDTH 0.044 ; # M4_01 ;
+  MAXWIDTH 0.108 ;
+  SPACING 0.046 ; # M4_24 ;
+ ##################################################
+ # Width Based Spacing Table
+ ##################################################
+ PROPERTY LEF58_SPACINGTABLE "
+  SPACINGTABLE TWOWIDTHS
+   WIDTH  0.000    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.044    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.056    0.046 0.046 0.046 0.046 0.046
+   WIDTH  0.076    0.046 0.046 0.046 0.060 0.060
+   WIDTH  0.090    0.046 0.046 0.046 0.060 0.060
+ ; " ;
+
+  AREA 0.007040 ;
+  PROPERTY LEF58_AREA
+  "AREA 0.007040 RECTWIDTH 0.044 ;
+  AREA 0.008960 RECTWIDTH 0.056 ;
+  AREA 0.0121600 RECTWIDTH 0.076 ;
+  AREA 0.0144000 RECTWIDTH 0.090 ;
+  AREA 0.0172800 RECTWIDTH 0.108 ;
+  " ;
+  PROPERTY LEF58_RECTONLY "RECTONLY ;" ;
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 0.044 0.056 0.076 0.09 0.108 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.109 EXTENSION 0.000 0.010 0.08 CLASS M4_E2E CORNERONLY ; " ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.057 EXTENSION 0.000 0.014 0.100 EXCEPTWITHIN -0.010 -0.001 CLASS M4_C2C ; " ;
+  #PROPERTY LEF58_CORNERSPACING "CORNERSPACING CONVEXCORNER CORNERONLY 0.056  WIDTH 0.000 SPACING 0.032 ; " ; # M4_80 - WW34
+  PROPERTY LEF58_EOLEXTENSIONSPACING "EOLEXTENSIONSPACING 0.056 PARALLELONLY ENDOFLINE 0.109 EXTENSION 0.000 ; " ; # M4_80
+  ANTENNAAREARATIO 5000.000 ; # IPN_05 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+
+END m4
+
+LAYER v4
+  TYPE CUT ;
+  SPACING 0.046 ; # V4_23 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via4_44x58S WIDTH 0.044 LENGTH 0.058 ;
+   CUTCLASS Via4_56x58S WIDTH 0.056 LENGTH 0.058 ;
+   CUTCLASS Via4_70x70 WIDTH 0.07 ;
+   CUTCLASS Via4_76x58S WIDTH 0.058 LENGTH 0.076 ;
+   CUTCLASS Via4_90x58S WIDTH 0.058 LENGTH 0.09 ;
+   CUTCLASS Via4_90x90 WIDTH 0.09 ;
+   CUTCLASS Via4_108x58S WIDTH 0.058 LENGTH 0.108 ;
+   CUTCLASS Via4_160x58S WIDTH 0.058 LENGTH 0.160 ;
+  " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via4_44x58S BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via4_44x58S ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via4_56x58S BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via4_56x58S ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via4_70x70 BELOW 0.003 -0.007 ;
+   ENCLOSURE CUTCLASS Via4_70x70 ABOVE 0.01 -0.007 ;
+   ENCLOSURE CUTCLASS Via4_76x58S BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via4_76x58S ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via4_90x58S BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via4_90x58S ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via4_90x90 BELOW 0.009 0.009 ;
+   ENCLOSURE CUTCLASS Via4_90x90 ABOVE 0.040 0.009 ;
+   ENCLOSURE CUTCLASS Via4_108x58S BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via4_108x58S ABOVE END 0.000 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via4_160x58S BELOW END 0.012 SIDE -0.001 ;
+   ENCLOSURE CUTCLASS Via4_160x58S ABOVE END 0.000 SIDE 0.021 ;
+  " ;
+
+#V4_32: v4-v3 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 LAYER v3
+   CUTCLASS            Via4_44x58S SIDE  Via4_44x58S END   Via4_56x58S SIDE  Via4_56x58S END   Via4_70x70        Via4_76x58S SIDE  Via4_76x58S END   Via4_90x58S SIDE  Via4_90x58S END   Via4_90x90        Via4_108x58S SIDE Via4_108x58S END  Via4_160x58S SIDE Via4_160x58S END  
+   Via3_58Sx44 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx44 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx56 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx56 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx76 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx76 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx90 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx90 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx108 SIDE - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx108 END  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_70x70          - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               
+ ; " ;
+
+#V4_32: v4-v3 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 SAMENET LAYER v3
+   CUTCLASS            Via4_44x58S SIDE  Via4_44x58S END   Via4_56x58S SIDE  Via4_56x58S END   Via4_70x70        Via4_76x58S SIDE  Via4_76x58S END   Via4_90x58S SIDE  Via4_90x58S END   Via4_90x90        Via4_108x58S SIDE Via4_108x58S END  Via4_160x58S SIDE Via4_160x58S END  
+   Via3_58Sx44 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx44 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx56 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx56 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx76 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx76 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx90 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx90 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx108 SIDE - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx108 END  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_70x70          - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               
+ ; " ;
+
+#v4-v3 same metal space is 0.0
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.0 SAMEMETAL LAYER v3
+   CUTCLASS            Via4_44x58S SIDE  Via4_44x58S END   Via4_56x58S SIDE  Via4_56x58S END   Via4_70x70        Via4_76x58S SIDE  Via4_76x58S END   Via4_90x58S SIDE  Via4_90x58S END   Via4_90x90        Via4_108x58S SIDE Via4_108x58S END  Via4_160x58S SIDE Via4_160x58S END  
+   Via3_58Sx44 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx44 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx56 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx56 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx76 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx76 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx90 SIDE  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx90 END   - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx108 SIDE - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_58Sx108 END  - -              - -             - -              - -             - -             - -            - -              - -             - -              - -             - -             - -            - -               - -             
+   Via3_70x70          - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               - -               
+ ; " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056  
+ #   CUTCLASS            Via4_44x58S SIDE  Via4_44x58S END   Via4_56x58S SIDE  Via4_56x58S END   Via4_70x70        Via4_76x58S SIDE  Via4_76x58S END   Via4_90x58S SIDE  Via4_90x58S END   Via4_90x90        Via4_108x58S SIDE Via4_108x58S END  Via4_160x58S SIDE Via4_160x58S END  
+ #   Via4_44x58S SIDE    V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_34 V4_34       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      
+ #   Via4_44x58S END     V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_56x58S SIDE    V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_34 V4_34       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      
+ #   Via4_56x58S END     V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_70x70          V4_24 V4_12       V4_24 V4_28       V4_24 V4_12       V4_24 V4_28       V4_31 V4_31       V4_24 V4_28       V4_24 V4_12       V4_24 V4_28       V4_24 V4_12       V4_34 V4_34       V4_24 V4_28       V4_24 V4_12       V4_24 V4_28       V4_24 V4_12       
+ #   Via4_76x58S SIDE    V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_76x58S END     V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_34 V4_34       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      
+ #   Via4_90x58S SIDE    V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_90x58S END     V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_34 V4_34       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      
+ #   Via4_90x90          V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       
+ #   Via4_108x58S SIDE   V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_108x58S END    V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_34 V4_34       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      
+ #   Via4_160x58S SIDE   V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_160x58S END    V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      V4_34 V4_34       V4_24 -           V4_24 V4_128      V4_24 -           V4_24 V4_128      
+ #  ; " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056  
+   CUTCLASS            Via4_44x58S SIDE  Via4_44x58S END   Via4_56x58S SIDE  Via4_56x58S END   Via4_70x70        Via4_76x58S SIDE  Via4_76x58S END   Via4_90x58S SIDE  Via4_90x58S END   Via4_90x90        Via4_108x58S SIDE Via4_108x58S END  Via4_160x58S SIDE Via4_160x58S END  
+   Via4_44x58S SIDE    -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       0.130 0.130       -     -           -     0.120       -     -           -     0.120       
+   Via4_44x58S END     -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_56x58S SIDE    -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       0.130 0.130       -     -           -     0.120       -     -           -     0.120       
+   Via4_56x58S END     -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_70x70          -     0.120       -     0.100       -     0.120       -     0.100       0.110 0.110       -     0.100       -     0.120       -     0.100       -     0.120       0.130 0.130       -     0.100       -     0.120       -     0.100       -     0.120       
+   Via4_76x58S SIDE    -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_76x58S END     -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       0.130 0.130       -     -           -     0.120       -     -           -     0.120       
+   Via4_90x58S SIDE    -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_90x58S END     -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       0.130 0.130       -     -           -     0.120       -     -           -     0.120       
+   Via4_90x90          0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       
+   Via4_108x58S SIDE   -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_108x58S END    -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       0.130 0.130       -     -           -     0.120       -     -           -     0.120       
+   Via4_160x58S SIDE   -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_160x58S END    -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       -     -           -     0.120       0.130 0.130       -     -           -     0.120       -     -           -     0.120       
+  ; " ;
+ #
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+ #   CUTCLASS            Via4_44x58S SIDE  Via4_44x58S END   Via4_56x58S SIDE  Via4_56x58S END   Via4_70x70        Via4_76x58S SIDE  Via4_76x58S END   Via4_90x58S SIDE  Via4_90x58S END   Via4_90x90        Via4_108x58S SIDE Via4_108x58S END  Via4_160x58S SIDE Via4_160x58S END  
+ #   Via4_44x58S SIDE    V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_34 V4_34       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       
+ #   Via4_44x58S END     V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_56x58S SIDE    V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_34 V4_34       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       
+ #   Via4_56x58S END     V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_70x70          V4_24 V4_12       V4_24 V4_28       V4_24 V4_12       V4_24 V4_28       V4_31 V4_31       V4_24 V4_28       V4_24 V4_12       V4_24 V4_28       V4_24 V4_12       V4_34 V4_34       V4_24 V4_28       V4_24 V4_12       V4_24 V4_28       V4_24 V4_12       
+ #   Via4_76x58S SIDE    V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_76x58S END     V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_34 V4_34       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       
+ #   Via4_90x58S SIDE    V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_90x58S END     V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_34 V4_34       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       
+ #   Via4_90x90          V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       V4_34 V4_34       
+ #   Via4_108x58S SIDE   V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_108x58S END    V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_34 V4_34       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       
+ #   Via4_160x58S SIDE   V4_24 -           V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 V4_28       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           V4_34 V4_34       V4_24 V4_28       V4_24 -           V4_24 V4_28       V4_24 -           
+ #   Via4_160x58S END    V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_12       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       V4_34 V4_34       V4_24 -           V4_24 V4_23       V4_24 -           V4_24 V4_23       
+ #  ; " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+   CUTCLASS            Via4_44x58S SIDE  Via4_44x58S END   Via4_56x58S SIDE  Via4_56x58S END   Via4_70x70        Via4_76x58S SIDE  Via4_76x58S END   Via4_90x58S SIDE  Via4_90x58S END   Via4_90x90        Via4_108x58S SIDE Via4_108x58S END  Via4_160x58S SIDE Via4_160x58S END  
+   Via4_44x58S SIDE    -     0.046       -     -           -     0.046       -     -           -     0.120       -     -           -     0.046       -     -           -     0.046       0.130 0.130       -     -           -     0.046       -     -           -     0.046       
+   Via4_44x58S END     -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_56x58S SIDE    -     0.046       -     -           -     0.046       -     -           -     0.120       -     -           -     0.046       -     -           -     0.046       0.130 0.130       -     -           -     0.046       -     -           -     0.046       
+   Via4_56x58S END     -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_70x70          -     0.120       -     0.100       -     0.120       -     0.100       0.110 0.110       -     0.100       -     0.120       -     0.100       -     0.120       0.130 0.130       -     0.100       -     0.120       -     0.100       -     0.120       
+   Via4_76x58S SIDE    -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_76x58S END     -     0.046       -     -           -     0.046       -     -           -     0.120       -     -           -     0.046       -     -           -     0.046       0.130 0.130       -     -           -     0.046       -     -           -     0.046       
+   Via4_90x58S SIDE    -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_90x58S END     -     0.046       -     -           -     0.046       -     -           -     0.120       -     -           -     0.046       -     -           -     0.046       0.130 0.130       -     -           -     0.046       -     -           -     0.046       
+   Via4_90x90          0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       0.130 0.130       
+   Via4_108x58S SIDE   -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_108x58S END    -     0.046       -     -           -     0.046       -     -           -     0.120       -     -           -     0.046       -     -           -     0.046       0.130 0.130       -     -           -     0.046       -     -           -     0.046       
+   Via4_160x58S SIDE   -     -           -     0.100       -     -           -     0.100       -     0.100       -     0.100       -     -           -     0.100       -     -           0.130 0.130       -     0.100       -     -           -     0.100       -     -           
+   Via4_160x58S END    -     0.046       -     -           -     0.046       -     -           -     0.120       -     -           -     0.046       -     -           -     0.046       0.130 0.130       -     -           -     0.046       -     -           -     0.046       
+  ; " ;
+
+ # FORBIDDEN SPACING to avoid spaces between Vx_23 and Vx_128 on Self Aligned Edges
+ # Relevant to Vias where certain offgrid offset spacing for M5 wires will not be allowed if Via spacing falls in Forbidden regionS
+PROPERTY LEF58_FORBIDDENSPACING "
+   FORBIDDENSPACING CUTCLASS Via4_44x58S 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via4_44x58S -0.002 TO Via4_56x58S -0.002 TO Via4_76x58S -0.002 TO Via4_90x58S -0.002 TO Via4_108x58S -0.002 TO Via4_160x58S ;
+   FORBIDDENSPACING CUTCLASS Via4_56x58S 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via4_44x58S -0.002 TO Via4_56x58S -0.002 TO Via4_76x58S -0.002 TO Via4_90x58S -0.002 TO Via4_108x58S -0.002 TO Via4_160x58S ;
+   FORBIDDENSPACING CUTCLASS Via4_76x58S 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via4_44x58S -0.002 TO Via4_56x58S -0.002 TO Via4_76x58S -0.002 TO Via4_90x58S -0.002 TO Via4_108x58S -0.002 TO Via4_160x58S ;
+   FORBIDDENSPACING CUTCLASS Via4_90x58S 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via4_44x58S -0.002 TO Via4_56x58S -0.002 TO Via4_76x58S -0.002 TO Via4_90x58S -0.002 TO Via4_108x58S -0.002 TO Via4_160x58S ;
+   FORBIDDENSPACING CUTCLASS Via4_108x58S 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via4_44x58S -0.002 TO Via4_56x58S -0.002 TO Via4_76x58S -0.002 TO Via4_90x58S -0.002 TO Via4_108x58S -0.002 TO Via4_160x58S ;
+   FORBIDDENSPACING CUTCLASS Via4_160x58S 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via4_44x58S -0.002 TO Via4_56x58S -0.002 TO Via4_76x58S -0.002 TO Via4_90x58S -0.002 TO Via4_108x58S -0.002 TO Via4_160x58S ;
+ " ;
+
+ ANTENNAAREARATIO 420.0 ;
+
+END v4
+
+LAYER m5
+  TYPE ROUTING ;
+  DIRECTION VERTICAL ;
+  PITCH 0.090 ; # calculated ;
+  WIDTH 0.044 ; # M5_01 ;
+  MINWIDTH 0.044 ; # M5_01 ;
+  MAXWIDTH 0.2 ;
+  SPACING 0.046 ; # M5_24 ;
+ ##################################################
+ # Width Based Spacing Table
+ ##################################################
+ PROPERTY LEF58_SPACINGTABLE "
+  SPACINGTABLE TWOWIDTHS
+   WIDTH  0.000    0.046 0.046 0.046 0.046 0.046 0.060 0.058
+   WIDTH  0.044    0.046 0.046 0.046 0.046 0.046 0.060 0.060
+   WIDTH  0.056    0.046 0.046 0.046 0.046 0.046 0.060 0.060
+   WIDTH  0.076    0.046 0.046 0.046 0.060 0.060 0.060 0.060
+   WIDTH  0.090    0.046 0.046 0.046 0.060 0.060 0.060 0.060
+   WIDTH  0.108    0.060 0.060 0.060 0.060 0.060 0.060 0.060
+   WIDTH  0.160    0.060 0.060 0.060 0.060 0.060 0.060 0.060
+ ; " ;
+
+  AREA 0.007040 ;
+  PROPERTY LEF58_AREA
+  "AREA 0.007040 RECTWIDTH 0.044 ;
+  AREA 0.008960 RECTWIDTH 0.056 ;
+  AREA 0.0121600 RECTWIDTH 0.076 ;
+  AREA 0.0144000 RECTWIDTH 0.090 ;
+  AREA 0.0172800 RECTWIDTH 0.108 ;
+  AREA 0.0256000 RECTWIDTH 0.160 ;
+  AREA 0.0320000 RECTWIDTH 0.200 ;
+  " ;
+  PROPERTY LEF58_RECTONLY "RECTONLY ;" ;
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 0.044 0.056 0.076 0.09 0.108 0.160 0.2 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.201 EXTENSION 0.000 0.010 0.08 CLASS M5_E2E CORNERONLY ; " ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.057 EXTENSION 0.000 0.014 0.100 EXCEPTWITHIN -0.010 -0.001 CLASS M5_C2C ; " ;
+  PROPERTY LEF58_EOLEXTENSIONSPACING "EOLEXTENSIONSPACING 0.056 PARALLELONLY ENDOFLINE 0.201 EXTENSION 0.000 ; " ; # M5_80
+  #PROPERTY LEF58_CORNERSPACING "CORNERSPACING CONVEXCORNER CORNERONLY 0.056  WIDTH 0.000 SPACING 0.032 ; " ; # M5_80 - WW34
+  ANTENNAAREARATIO 5000.000 ; # IPN_06 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+
+END m5
+
+LAYER v5
+  TYPE CUT ;
+  SPACING 0.046 ; # V5_23 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via5_58Sx44 WIDTH 0.044 LENGTH 0.058 ;
+   CUTCLASS Via5_58Sx56 WIDTH 0.056 LENGTH 0.058 ;
+   CUTCLASS Via5_58Sx76 WIDTH 0.058 LENGTH 0.076 ;
+   CUTCLASS Via5_58Sx90 WIDTH 0.058 LENGTH 0.09 ;
+   CUTCLASS Via5_58Sx108 WIDTH 0.058 LENGTH 0.108 ;
+   CUTCLASS Via5_58Sx160 WIDTH 0.058 LENGTH 0.16 ;
+   CUTCLASS Via5_70x70 WIDTH 0.07 ;
+   CUTCLASS Via5_90x90 WIDTH 0.09 ;
+ " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via5_58Sx44 BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via5_58Sx44 ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via5_58Sx56 BELOW END -0.007 SIDE 0.012 ;
+   ENCLOSURE CUTCLASS Via5_58Sx56 ABOVE END 0.021 SIDE 0.0 ;
+   ENCLOSURE CUTCLASS Via5_58Sx76 BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via5_58Sx76 ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via5_58Sx90 BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via5_58Sx90 ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via5_58Sx108 BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via5_58Sx108 ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via5_58Sx160 BELOW END 0.012 SIDE -0.007 ;
+   ENCLOSURE CUTCLASS Via5_58Sx160 ABOVE END 0.0 SIDE 0.021 ;
+   ENCLOSURE CUTCLASS Via5_70x70 BELOW -0.007 0.003 ;
+   ENCLOSURE CUTCLASS Via5_70x70 ABOVE 0.010 0.003 ;
+   ENCLOSURE CUTCLASS Via5_90x90 BELOW 0.009 0.009 ;
+   ENCLOSURE CUTCLASS Via5_90x90 ABOVE 0.035 0.009 ;
+ " ;
+
+#V5_32: v5-v4 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 LAYER v4
+   CUTCLASS          Via5_58Sx44 SIDE Via5_58Sx44 END Via5_58Sx56 SIDE Via5_58Sx56 END Via5_58Sx76 SIDE Via5_58Sx76 END Via5_58Sx90 SIDE Via5_58Sx90 END Via5_58Sx108 SIDE Via5_58Sx108 END Via5_58Sx160 SIDE Via5_58Sx160 END Via5_70x70 SIDE Via5_70x70 END Via5_90x90 SIDE Via5_90x90 END
+   Via4_44x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_44x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_56x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_56x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_70x70        - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_76x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_76x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x90        - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_108x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_108x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_160x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_160x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+ ; " ;
+
+#V5_32: v5-v4 space is 0.036
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.036 SAMENET LAYER v4
+   CUTCLASS          Via5_58Sx44 SIDE Via5_58Sx44 END Via5_58Sx56 SIDE Via5_58Sx56 END Via5_58Sx76 SIDE Via5_58Sx76 END Via5_58Sx90 SIDE Via5_58Sx90 END Via5_58Sx108 SIDE Via5_58Sx108 END Via5_58Sx160 SIDE Via5_58Sx160 END Via5_70x70 SIDE Via5_70x70 END Via5_90x90 SIDE Via5_90x90 END
+   Via4_44x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_44x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_56x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_56x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_70x70        - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_76x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_76x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x90        - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_108x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_108x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_160x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_160x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+ ; " ;
+
+#v5-v4 same metal space is 0.0
+ PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.0 SAMEMETAL LAYER v4
+   CUTCLASS          Via5_58Sx44 SIDE Via5_58Sx44 END Via5_58Sx56 SIDE Via5_58Sx56 END Via5_58Sx76 SIDE Via5_58Sx76 END Via5_58Sx90 SIDE Via5_58Sx90 END Via5_58Sx108 SIDE Via5_58Sx108 END Via5_58Sx160 SIDE Via5_58Sx160 END Via5_70x70 SIDE Via5_70x70 END Via5_90x90 SIDE Via5_90x90 END
+   Via4_44x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_44x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_56x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_56x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_70x70        - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_76x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_76x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x58S SIDE  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x58S END   - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_90x90        - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_108x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_108x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -           
+   Via4_160x58S SIDE - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+   Via4_160x58S END  - -              - -             - -              - -             - -              - -             - -              - -             - -               - -              - -               - -              - -             - -            - -             - -               
+ ; " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056  
+#   CUTCLASS          Via5_58Sx44 SIDE Via5_58Sx44 END Via5_58Sx56 SIDE Via5_58Sx56 END Via5_58Sx76 SIDE Via5_58Sx76 END Via5_58Sx90 SIDE Via5_58Sx90 END Via5_58Sx108 SIDE Via5_58Sx108 END Via5_58Sx160 SIDE Via5_58Sx160 END Via5_70x70 Via5_90x90
+#   Via5_58Sx44 SIDE  V5_24 V5_28      - -             V5_24 V5_28      - -             - -              V5_24 V5_28     - -              V5_24 V5_28     - -               V5_24 V5_28      - -               V5_24 V5_28      V5_24 V5_28 V5_24 V5_28
+#   Via5_58Sx44 END   - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              V5_24 V5_28 V5_24 V5_28
+#   Via5_58Sx56 SIDE  V5_24 V5_28      - -             V5_24 V5_28      - -             - -              V5_24 V5_28     - -              V5_24 V5_28     - -               V5_24 V5_28      - -               V5_24 V5_28      V5_24 V5_28 V5_24 V5_28
+#   Via5_58Sx56 END   - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              V5_24 V5_28 V5_24 V5_28
+#   Via5_58Sx76 SIDE  - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx76 END   V5_24 V5_28      - -             V5_24 V5_28      - -             - -              V5_24 V5_28     - -              V5_24 V5_28     - -               V5_24 V5_28      - -               V5_24 V5_28      - -        - -       
+#   Via5_58Sx90 SIDE  - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx90 END   V5_24 V5_28      - -             V5_24 V5_28      - -             - -              V5_24 V5_28     - -              V5_24 V5_28     - -               V5_24 V5_28      - -               V5_24 V5_28      - -        - -       
+#   Via5_58Sx108 SIDE - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx108 END  V5_24 V5_28      - -             V5_24 V5_28      - -             - -              V5_24 V5_28     - -              V5_24 V5_28     - -               V5_24 V5_28      - -               V5_24 V5_28      - -        - -       
+#   Via5_58Sx160 SIDE - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx160 END  V5_24 V5_28      - -             V5_24 V5_28      - -             - -              V5_24 V5_28     - -              V5_24 V5_28     - -               V5_24 V5_28      - -               V5_24 V5_28      - -        - -       
+#   Via5_70x70        V5_24 V5_28      V5_24 V5_28     V5_24 V5_28      V5_24 V5_28     - -              - -             - -              - -             - -               - -              - -               - -              V5_24 V5_28 V5_24 V5_28
+#   Via5_90x90        V5_24 V5_28      V5_24 V5_28     V5_24 V5_28      V5_24 V5_28     - -              - -             - -              - -             - -               - -              - -               - -              V5_24 V5_28 V5_24 V5_28# ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056  
+   CUTCLASS          Via5_58Sx44 SIDE Via5_58Sx44 END Via5_58Sx56 SIDE Via5_58Sx56 END Via5_58Sx76 SIDE Via5_58Sx76 END Via5_58Sx90 SIDE Via5_58Sx90 END Via5_58Sx108 SIDE Via5_58Sx108 END Via5_58Sx160 SIDE Via5_58Sx160 END Via5_70x70 Via5_90x90
+   Via5_58Sx44 SIDE  - 0.12           - -             - 0.12           - -             - -              - 0.12          - -              - 0.12          - -               - 0.12           - -               - 0.12           - 0.12     - 0.13    
+   Via5_58Sx44 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx56 SIDE  - 0.12           - -             - 0.12           - -             - -              - 0.12          - -              - 0.12          - -               - 0.12           - -               - 0.12           - 0.12     - 0.13    
+   Via5_58Sx56 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx76 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx76 END   - 0.12           - -             - 0.12           - -             - -              - 0.12          - -              - 0.12          - -               - 0.12           - -               - 0.12           - 0.12     - 0.13    
+   Via5_58Sx90 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx90 END   - 0.12           - -             - 0.12           - -             - -              - 0.12          - -              - 0.12          - -               - 0.12           - -               - 0.12           - 0.12     - 0.13    
+   Via5_58Sx108 SIDE - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx108 END  - 0.12           - -             - 0.12           - -             - -              - 0.12          - -              - 0.12          - -               - 0.12           - -               - 0.12           - 0.12     - 0.13    
+   Via5_58Sx160 SIDE - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx160 END  - 0.12           - -             - 0.12           - -             - -              - 0.12          - -              - 0.12          - -               - 0.12           - -               - 0.12           - 0.12     - 0.13    
+   Via5_70x70        - 0.12           - 0.1           - 0.12           - 0.1           - 0.1            - 0.12          - 0.1            - 0.12          - 0.1             - 0.12           - 0.1             - 0.12           - 0.11     - 0.13    
+   Via5_90x90        - 0.13           - 0.13          - 0.13           - 0.13          - 0.13           - 0.13          - 0.13           - 0.13          - 0.13            - 0.13           - 0.13            - 0.13           - 0.13     - 0.13     ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+#   CUTCLASS          Via5_58Sx44 SIDE Via5_58Sx44 END Via5_58Sx56 SIDE Via5_58Sx56 END Via5_58Sx76 SIDE Via5_58Sx76 END Via5_58Sx90 SIDE Via5_58Sx90 END Via5_58Sx108 SIDE Via5_58Sx108 END Via5_58Sx160 SIDE Via5_58Sx160 END Via5_70x70 Via5_90x90
+#   Via5_58Sx44 SIDE  V5_24 V5_23      - -             V5_24 V5_128     - -             - -              V5_24 V5_128    - -              V5_24 V5_128    - -               V5_24 V5_128     - -               V5_24 V5_128     V5_24 V5_128 V5_24 V5_128
+#   Via5_58Sx44 END   - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              V5_24 V5_28 V5_24 V5_28
+#   Via5_58Sx56 SIDE  V5_24 V5_128     - -             V5_24 V5_23      - -             - -              V5_24 V5_128    - -              V5_24 V5_128    - -               V5_24 V5_128     - -               V5_24 V5_128     V5_24 V5_128 V5_24 V5_128
+#   Via5_58Sx56 END   - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              V5_24 V5_28 V5_24 V5_28
+#   Via5_58Sx76 SIDE  - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx76 END   V5_24 V5_128     - -             V5_24 V5_128     - -             - -              V5_24 V5_23     - -              V5_24 V5_128    - -               V5_24 V5_128     - -               V5_24 V5_128     - -        - -       
+#   Via5_58Sx90 SIDE  - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx90 END   V5_24 V5_128     - -             V5_24 V5_128     - -             - -              V5_24 V5_128    - -              V5_24 V5_23     - -               V5_24 V5_128     - -               V5_24 V5_128     - -        - -       
+#   Via5_58Sx108 SIDE - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx108 END  V5_24 V5_128     - -             V5_24 V5_128     - -             - -              V5_24 V5_128    - -              V5_24 V5_128    - -               V5_24 V5_23      - -               V5_24 V5_128     - -        - -       
+#   Via5_58Sx160 SIDE - -              V5_24 V5_28     - -              V5_24 V5_28     V5_24 V5_28      - -             V5_24 V5_28      - -             V5_24 V5_28       - -              V5_24 V5_28       - -              - -        - -       
+#   Via5_58Sx160 END  V5_24 V5_128     - -             V5_24 V5_128     - -             - -              V5_24 V5_128    - -              V5_24 V5_128    - -               V5_24 V5_128     - -               V5_24 V5_23      - -        - -       
+#   Via5_70x70        V5_24 V5_128     V5_24 V5_28     V5_24 V5_128     V5_24 V5_28     - -              - -             - -              - -             - -               - -              - -               - -              V5_24 V5_28 V5_24 V5_128
+#   Via5_90x90        V5_24 V5_128     V5_24 V5_28     V5_24 V5_128     V5_24 V5_28     - -              - -             - -              - -             - -               - -              - -               - -              V5_24 V5_128 V5_24 V5_28# ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.056 SAMEMETAL 
+   CUTCLASS          Via5_58Sx44 SIDE Via5_58Sx44 END Via5_58Sx56 SIDE Via5_58Sx56 END Via5_58Sx76 SIDE Via5_58Sx76 END Via5_58Sx90 SIDE Via5_58Sx90 END Via5_58Sx108 SIDE Via5_58Sx108 END Via5_58Sx160 SIDE Via5_58Sx160 END Via5_70x70 Via5_90x90
+   Via5_58Sx44 SIDE  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - -               - 0.046          - 0.12     - 0.13    
+   Via5_58Sx44 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx56 SIDE  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - -               - 0.046          - 0.12     - 0.13    
+   Via5_58Sx56 END   - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13    
+   Via5_58Sx76 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13           
+   Via5_58Sx76 END   - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - -               - 0.046          - 0.12     - 0.13           
+   Via5_58Sx90 SIDE  - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13           
+   Via5_58Sx90 END   - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - -               - 0.046          - 0.12     - 0.13           
+   Via5_58Sx108 SIDE - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13           
+   Via5_58Sx108 END  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - -               - 0.046          - 0.12     - 0.13           
+   Via5_58Sx160 SIDE - -              - 0.1           - -              - 0.1           - 0.1            - -             - 0.1            - -             - 0.1             - -              - 0.1             - -              - 0.1      - 0.13           
+   Via5_58Sx160 END  - 0.046          - -             - 0.046          - -             - -              - 0.046         - -              - 0.046         - -               - 0.046          - -               - 0.046          - 0.12     - 0.13           
+   Via5_70x70        - 0.12           - 0.1           - 0.12           - 0.1           - 0.1            - 0.12          - 0.1            - 0.12          - 0.1             - 0.12           - 0.1             - 0.12           - 0.11     - 0.13    
+   Via5_90x90        - 0.13           - 0.13          - 0.13           - 0.13          - 0.13           - 0.13          - 0.13           - 0.13          - 0.13            - 0.13           - 0.13            - 0.13           - 0.13     - 0.13     ;
+ " ;
+
+ # FORBIDDEN SPACING to avoid spaces between Vx_23 and Vx_128 on Self Aligned Edges
+ # Relevant to Vias where certain offgrid offset spacing for M6 wires will not be allowed if Via spacing falls in Forbidden region
+PROPERTY LEF58_FORBIDDENSPACING "
+   FORBIDDENSPACING CUTCLASS Via5_58Sx44 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via5_58Sx44 -0.002 TO Via5_58Sx56 -0.002 TO Via5_58Sx76 -0.002 TO Via5_58Sx90 -0.002 TO Via5_58Sx108 -0.002 TO Via5_58Sx160 ;
+   FORBIDDENSPACING CUTCLASS Via5_58Sx56 0.061 0.119 LONGEDGEONLY PRL -0.002 TO Via5_58Sx44 -0.002 TO Via5_58Sx56 -0.002 TO Via5_58Sx76 -0.002 TO Via5_58Sx90 -0.002 TO Via5_58Sx108 -0.002 TO Via5_58Sx160 ;
+   FORBIDDENSPACING CUTCLASS Via5_58Sx76 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via5_58Sx44 -0.002 TO Via5_58Sx56 -0.002 TO Via5_58Sx76 -0.002 TO Via5_58Sx90 -0.002 TO Via5_58Sx108 -0.002 TO Via5_58Sx160 ;
+   FORBIDDENSPACING CUTCLASS Via5_58Sx90 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via5_58Sx44 -0.002 TO Via5_58Sx56 -0.002 TO Via5_58Sx76 -0.002 TO Via5_58Sx90 -0.002 TO Via5_58Sx108 -0.002 TO Via5_58Sx160 ;
+   FORBIDDENSPACING CUTCLASS Via5_58Sx108 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via5_58Sx44 -0.002 TO Via5_58Sx56 -0.002 TO Via5_58Sx76 -0.002 TO Via5_58Sx90 -0.002 TO Via5_58Sx108 -0.002 TO Via5_58Sx160 ;
+   FORBIDDENSPACING CUTCLASS Via5_58Sx160 0.061 0.119 SHORTEDGEONLY PRL -0.002 TO Via5_58Sx44 -0.002 TO Via5_58Sx56 -0.002 TO Via5_58Sx76 -0.002 TO Via5_58Sx90 -0.002 TO Via5_58Sx108 -0.002 TO Via5_58Sx160 ;
+ " ;
+
+  ANTENNAAREARATIO 420.000 ; # IPN_306 ;
+
+END v5
+
+LAYER m6
+  TYPE ROUTING ;
+  DIRECTION HORIZONTAL ;
+  PITCH 0.090 ; # calculated ;
+  WIDTH 0.044 ; # M6_01 ;
+  MINWIDTH 0.044 ; # M6_01 ;
+  MAXWIDTH 0.4 ;
+  SPACING 0.046 ; # M6_24 ;
+ ##################################################
+ # Width Based Spacing Table
+ ##################################################
+ PROPERTY LEF58_SPACINGTABLE "
+  SPACINGTABLE TWOWIDTHS
+   WIDTH  0.000    0.046 0.046 0.046 0.046 0.046 0.046 0.060 0.058 0.100
+   WIDTH  0.044    0.046 0.046 0.046 0.046 0.046 0.046 0.060 0.060 0.100
+   WIDTH  0.056    0.046 0.046 0.046 0.046 0.046 0.046 0.060 0.060 0.100
+   WIDTH  0.076    0.046 0.046 0.046 0.060 0.060 0.060 0.060 0.060 0.100
+   WIDTH  0.088    0.046 0.046 0.046 0.060 0.060 0.060 0.060 0.060 0.100
+   WIDTH  0.090    0.046 0.046 0.046 0.060 0.060 0.060 0.060 0.060 0.100
+   WIDTH  0.108    0.060 0.060 0.060 0.060 0.060 0.060 0.060 0.060 0.100
+   WIDTH  0.160    0.060 0.060 0.060 0.060 0.060 0.060 0.060 0.060 0.100
+   WIDTH  0.200    0.100 0.100 0.100 0.100 0.100 0.100 0.100 0.100 0.100
+ ; " ;
+
+  AREA 0.007040 ;
+  PROPERTY LEF58_AREA
+  "AREA 0.007040 RECTWIDTH 0.044 ;
+  AREA 0.008960 RECTWIDTH 0.056 ;
+  AREA 0.0121600 RECTWIDTH 0.076 ;
+  AREA 0.0140800 RECTWIDTH 0.088 ;
+  AREA 0.0144000 RECTWIDTH 0.090 ;
+  AREA 0.0172800 RECTWIDTH 0.108 ;
+  AREA 0.0256000 RECTWIDTH 0.160 ;
+  AREA 0.0320000 RECTWIDTH 0.200 ;
+  AREA 0.0640000 RECTWIDTH 0.400 ;
+  " ;
+  PROPERTY LEF58_RECTONLY "RECTONLY ;" ;
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 0.044 0.056 0.076 0.088 0.09 0.108 0.16 0.2 0.4 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.401 EXTENSION 0.000 0.010 0.08 CLASS M6_E2E CORNERONLY ; " ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.057 EXTENSION 0.000 0.014 0.100 EXCEPTWITHIN -0.010 -0.001 CLASS M6_C2C ; " ; 
+  PROPERTY LEF58_EOLEXTENSIONSPACING "EOLEXTENSIONSPACING 0.056 PARALLELONLY ENDOFLINE 0.401 EXTENSION 0.000 ; " ; # M6_80
+  #PROPERTY LEF58_CORNERSPACING "CORNERSPACING CONVEXCORNER CORNERONLY 0.056  WIDTH 0.000 SPACING 0.032 ; " ; # M6_80
+  ANTENNAAREARATIO 5000.000 ; # IPN_07 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+
+END m6
+
+LAYER v6
+  TYPE CUT ;
+  SPACING 0.240 ; # V6_33 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via6_200x44 WIDTH 0.044 LENGTH 0.2 ;
+   CUTCLASS Via6_200x120 WIDTH 0.12 LENGTH 0.2 ;
+   CUTCLASS Via6_400x120 WIDTH 0.12 LENGTH 0.4 ;
+ " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via6_200x44 BELOW END -0.02 SIDE 0.02 ;
+   ENCLOSURE CUTCLASS Via6_200x44 ABOVE END 0.06 SIDE 0.06 ;
+   ENCLOSURE CUTCLASS Via6_200x120 BELOW END 0.0 SIDE 0.02 ;
+   ENCLOSURE CUTCLASS Via6_200x120 ABOVE END 0.06 SIDE 0.06 ;
+   ENCLOSURE CUTCLASS Via6_400x120 BELOW END 0.0 SIDE 0.02 ;
+   ENCLOSURE CUTCLASS Via6_400x120 ABOVE END 0.06 SIDE 0.06 ;
+ " ;
+
+#V6_33: v6-v5 space is 0.24
+#Deleted v6-v5 spacing table for same and diff nets because Redbook doesn't have those rules
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.24  
+#   CUTCLASS          Via6_200x120 SIDE Via6_200x120 END Via6_400x120 SIDE Via6_400x120 END
+#   Via6_200x120 SIDE V6_33 -           - -              V6_33 -           - -             
+#   Via6_200x120 END  - -               V6_33 V6_33      - -               V6_33 V6_33     
+#   Via6_400x120 SIDE V6_33 -           - -              V6_33 -           - -             
+#   Via6_400x120 END  - -               V6_33 V6_33      - -               V6_33 V6_33     # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.24  
+   CUTCLASS          Via6_200x44 SIDE Via6_200x44 END Via6_200x120 SIDE Via6_200x120 END Via6_400x120 SIDE Via6_400x120 END
+   Via6_200x44 SIDE  - -               - -               - -               - -              - -               - -             
+   Via6_200x44 END   - -               - -               - -               - -              - -               - -             
+   Via6_200x120 SIDE - -               - -               - -               - -              - -               - -             
+   Via6_200x120 END  - -               - -               - -               - -              - -               - -             
+   Via6_400x120 SIDE - -               - -               - -               - -              - -               - -             
+   Via6_400x120 END  - -               - -               - -               - -              - -               - -              ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 0.24 SAMEMETAL 
+#   CUTCLASS          Via6_200x120 SIDE Via6_200x120 END Via6_400x120 SIDE Via6_400x120 END
+#   Via6_200x120 SIDE V6_33 -           - -              V6_33 -           - -             
+#   Via6_200x120 END  - -               V6_33 V6_33      - -               V6_33 V6_33     
+#   Via6_400x120 SIDE V6_33 -           - -              V6_33 -           - -             
+#   Via6_400x120 END  - -               V6_33 V6_33      - -               V6_33 V6_33     # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 0.24 SAMEMETAL 
+   CUTCLASS          Via6_200x44 SIDE Via6_200x44 END Via6_200x120 SIDE Via6_200x120 END Via6_400x120 SIDE Via6_400x120 END
+   Via6_200x44 SIDE  - -               - -               - -               - -              - -               - -             
+   Via6_200x44 END   - -               - -               - -               - -              - -               - -             
+   Via6_200x120 SIDE - -               - -               - -               - -              - -               - -             
+   Via6_200x120 END  - -               - -               - -               - -              - -               - -             
+   Via6_400x120 SIDE - -               - -               - -               - -              - -               - -             
+   Via6_400x120 END  - -               - -               - -               - -              - -               - -              ;
+ " ;
+  ANTENNAAREARATIO 550.000 ; # IPN_307 ;
+
+END v6
+
+LAYER m7
+  TYPE ROUTING ;
+  DIRECTION VERTICAL ;
+  PITCH 1.080 ; # calculated ;
+  WIDTH 0.540 ; # M7_01 ;
+  MINWIDTH 0.540 ; # M7_23 ;
+  MAXWIDTH 6.0 ;
+  SPACING 0.540 ; # M7_02 ;
+  AREA 0.291600 ;
+  PROPERTY LEF58_AREA
+  "AREA 1.15020 RECTWIDTH 0.54 ;
+  AREA 2.30040 RECTWIDTH 1.08 ;
+  AREA 12.78000 RECTWIDTH 6.00 ;
+  " ;
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 0.54 1.08 6.0 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 6.001 EXTENSION 0.000 0.010 0.54 CLASS M7_E2E CORNERONLY ; " ;
+  ANTENNAAREARATIO 5000.000 ; # IPN_08 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+
+END m7
+
+LAYER v7
+  TYPE CUT ;
+  SPACING 2.000 ; # V7_40 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS Via7_800x1850 WIDTH 0.8 LENGTH 1.85 ;
+   CUTCLASS Via7_800x3700 WIDTH 0.8 LENGTH 3.7 ;
+   CUTCLASS Via7_800x7400 WIDTH 0.8 LENGTH 7.4 ;
+ " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS Via7_800x1850 BELOW END 0.14 SIDE 0.14 ;
+   ENCLOSURE CUTCLASS Via7_800x1850 ABOVE END 0.6 SIDE 0.6 ;
+   ENCLOSURE CUTCLASS Via7_800x3700 BELOW END 0.14 SIDE 0.14 ;
+   ENCLOSURE CUTCLASS Via7_800x3700 ABOVE END 0.6 SIDE 0.6 ;
+   ENCLOSURE CUTCLASS Via7_800x7400 BELOW END 0.14 SIDE 0.14 ;
+   ENCLOSURE CUTCLASS Via7_800x7400 ABOVE END 0.6 SIDE 0.6 ;
+ " ;
+
+#Removed V7 to V6 spacing table as it is not defined in the Redbook
+
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 2.5  
+#   CUTCLASS           Via7_800x1850 SIDE Via7_800x1850 END Via7_800x3700 SIDE Via7_800x3700 END Via7_800x7400 SIDE Via7_800x7400 END
+#   Via7_800x1850 SIDE V7_41 -            - -               V7_41 -            - -               V7_41 -            - -              
+#   Via7_800x1850 END  - -                V7_41 V7_40       - -                V7_41 V7_40       - -                V7_41 V7_40      
+#   Via7_800x3700 SIDE V7_41 -            - -               V7_41 -            - -               V7_41 -            - -              
+#   Via7_800x3700 END  - -                V7_41 V7_40       - -                V7_41 V7_40       - -                V7_41 V7_40      
+#   Via7_800x7400 SIDE V7_41 -            - -               V7_41 -            - -               V7_41 -            - -              
+#   Via7_800x7400 END  - -                V7_41 V7_40       - -                V7_41 V7_40       - -                V7_41 V7_40      # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 2.5  
+   CUTCLASS           Via7_800x1850 SIDE Via7_800x1850 END Via7_800x3700 SIDE Via7_800x3700 END Via7_800x7400 SIDE Via7_800x7400 END
+   Via7_800x1850 SIDE - -                - -               - -                - -               - -                - -              
+   Via7_800x1850 END  - -                - 2.0             - -                - 2.0             - -                - 2.0            
+   Via7_800x3700 SIDE - -                - -               - -                - -               - -                - -              
+   Via7_800x3700 END  - -                - 2.0             - -                - 2.0             - -                - 2.0            
+   Via7_800x7400 SIDE - -                - -               - -                - -               - -                - -              
+   Via7_800x7400 END  - -                - 2.0             - -                - 2.0             - -                - 2.0             ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 2.5 SAMEMETAL 
+#   CUTCLASS           Via7_800x1850 SIDE Via7_800x1850 END Via7_800x3700 SIDE Via7_800x3700 END Via7_800x7400 SIDE Via7_800x7400 END
+#   Via7_800x1850 SIDE V7_41 -            - -               V7_41 -            - -               V7_41 -            - -              
+#   Via7_800x1850 END  - -                V7_41 V7_40       - -                V7_41 V7_40       - -                V7_41 V7_40      
+#   Via7_800x3700 SIDE V7_41 -            - -               V7_41 -            - -               V7_41 -            - -              
+#   Via7_800x3700 END  - -                V7_41 V7_40       - -                V7_41 V7_40       - -                V7_41 V7_40      
+#   Via7_800x7400 SIDE V7_41 -            - -               V7_41 -            - -               V7_41 -            - -              
+#   Via7_800x7400 END  - -                V7_41 V7_40       - -                V7_41 V7_40       - -                V7_41 V7_40      # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 2.5 SAMEMETAL 
+   CUTCLASS           Via7_800x1850 SIDE Via7_800x1850 END Via7_800x3700 SIDE Via7_800x3700 END Via7_800x7400 SIDE Via7_800x7400 END
+   Via7_800x1850 SIDE - -                - -               - -                - -               - -                - -              
+   Via7_800x1850 END  - -                - 2.0             - -                - 2.0             - -                - 2.0            
+   Via7_800x3700 SIDE - -                - -               - -                - -               - -                - -              
+   Via7_800x3700 END  - -                - 2.0             - -                - 2.0             - -                - 2.0            
+   Via7_800x7400 SIDE - -                - -               - -                - -               - -                - -              
+   Via7_800x7400 END  - -                - 2.0             - -                - 2.0             - -                - 2.0             ;
+ " ;
+  ANTENNAAREARATIO 550.000 ; # IPN_308 ;
+
+END v7
+
+LAYER m8
+  TYPE ROUTING ;
+  DIRECTION HORIZONTAL ;
+  PITCH 4.000 ; # calculated ;
+  WIDTH 2.000 ; # M8_01 ;
+  MINWIDTH 2.000 ; # M8_23 ;
+  MAXWIDTH 25.0 ;
+  SPACING 2.000 ; # M8_02 ;
+  AREA 4.000000 ;
+  PROPERTY LEF58_AREA
+  "AREA 4.000000 RECTWIDTH 2.00 ;
+  AREA 50.000000 RECTWIDTH 25.00 ;
+  " ;
+ PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 2.0 25.0 ;" ;
+  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 25.001 EXTENSION 0.000 0.010 2.0 CLASS M8_E2E CORNERONLY ; " ;
+  ANTENNAAREARATIO 0.000 ; # IPN_13 ;
+  ANTENNADIFFAREARATIO 3080.000 ; # IPTD_600 ;
+
+END m8
+
+LAYER tv1
+  TYPE CUT ;
+  SPACING 124.400 ; # BU_407 - TV1_31 ;
+  PROPERTY LEF58_CUTCLASS "
+   CUTCLASS TV1_30000x6000 WIDTH 6.0 LENGTH 30.0 ;
+ " ;
+  PROPERTY LEF58_ENCLOSURE "
+   ENCLOSURE CUTCLASS TV1_30000x6000 BELOW END 3.0 SIDE 3.0 ;
+   ENCLOSURE CUTCLASS TV1_30000x6000 ABOVE END 12.5 SIDE 12.5 ;
+ " ;
+
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 124.4  
+#   CUTCLASS            TV1_30000x6000 SIDE TV1_30000x6000 END
+#   TV1_30000x6000 SIDE - -                 - -               
+#   TV1_30000x6000 END  - -                 - BU_407 - TV1_31 # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 124.4  
+   CUTCLASS            TV1_30000x6000 SIDE TV1_30000x6000 END
+   TV1_30000x6000 SIDE - -                 - -               
+   TV1_30000x6000 END  - -                 - -                ;
+ " ;
+
+#PROPERTY LEF58_SPACINGTABLE "
+#   SPACINGTABLE DEFAULT 124.4 SAMEMETAL 
+#   CUTCLASS            TV1_30000x6000 SIDE TV1_30000x6000 END
+#   TV1_30000x6000 SIDE - -                 - -               
+#   TV1_30000x6000 END  - -                 - BU_407 - TV1_31 # ;
+# " ;
+
+PROPERTY LEF58_SPACINGTABLE "
+   SPACINGTABLE DEFAULT 124.4 SAMEMETAL 
+   CUTCLASS            TV1_30000x6000 SIDE TV1_30000x6000 END
+   TV1_30000x6000 SIDE - -                 - -               
+   TV1_30000x6000 END  - -                 - -                ;
+ " ;
+
+END tv1
+
+LAYER c4
+  TYPE ROUTING ;
+  DIRECTION VERTICAL ;
+  PITCH 130.400 ; # calculated ;
+  WIDTH 55.000 ; # BU_401 ;
+  MINWIDTH 55.000 ; # BU_401 ;
+  SPACING 75.400 ; # BU_407 - BU_401 ;
+  PROPERTY LEF58_WIDTHTABLE "WIDTHTABLE 55.0 ;" ;
+
+END c4
+
+###########################
+##### VIA's SECTION #######
+###########################
+
+VIA VIA0_T_68X44S_38V_68V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER tcn ;
+ RECT -0.019 -0.025 0.019 0.025 ;
+ LAYER v0 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER m1 ;
+ RECT -0.034 -0.042 0.034 0.042 ;
+END VIA0_T_68X44S_38V_68V
+
+VIA VIA0_T_64X44_38V_68V
+ RESISTANCE 1.00 ;
+ LAYER tcn ;
+ RECT -0.019 -0.025 0.019 0.025 ;
+ LAYER v0 ;
+ RECT -0.032 -0.022 0.032 0.022 ;
+ LAYER m1 ;
+ RECT -0.034 -0.042 0.034 0.042 ;
+END VIA0_T_64X44_38V_68V
+
+VIA VIA0_G_68X44S_38H_68V
+ RESISTANCE 1.00 ;
+ LAYER gcn ;
+ RECT -0.009 -0.019 0.009 0.019 ;
+ LAYER v0 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER m1 ;
+ RECT -0.034 -0.042 0.034 0.042 ;
+END VIA0_G_68X44S_38H_68V
+
+VIA VIA1_60SX44_68V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER v1 ;
+ RECT -0.03 -0.022 0.03 0.022 ;
+ LAYER m2 ;
+ RECT -0.052 -0.022 0.052 0.022 ;
+END VIA1_60SX44_68V_44H
+
+VIA VIA1_60SX44_100V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.032 0.05 0.032 ;
+ LAYER v1 ;
+ RECT -0.03 -0.022 0.03 0.022 ;
+ LAYER m2 ;
+ RECT -0.052 -0.022 0.052 0.022 ;
+END VIA1_60SX44_100V_44H
+
+VIA VIA1_60SX44_44H_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+ LAYER v1 ;
+ RECT -0.03 -0.022 0.03 0.022 ;
+ LAYER m2 ;
+ RECT -0.052 -0.022 0.052 0.022 ;
+END VIA1_60SX44_44H_44H
+
+VIA VIA1_60SX56_68V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.034 -0.038 0.034 0.038 ;
+ LAYER v1 ;
+ RECT -0.03 -0.028 0.03 0.028 ;
+ LAYER m2 ;
+ RECT -0.052 -0.028 0.052 0.028 ;
+END VIA1_60SX56_68V_56H
+
+VIA VIA1_60SX56_100V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+ LAYER v1 ;
+ RECT -0.03 -0.028 0.03 0.028 ;
+ LAYER m2 ;
+ RECT -0.052 -0.028 0.052 0.028 ;
+END VIA1_60SX56_100V_56H
+
+VIA VIA1_60SX76_68V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.034 -0.048 0.034 0.048 ;
+ LAYER v1 ;
+ RECT -0.03 -0.038 0.03 0.038 ;
+ LAYER m2 ;
+ RECT -0.052 -0.038 0.052 0.038 ;
+END VIA1_60SX76_68V_76H
+
+VIA VIA1_60SX76_100V_76H
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.048 0.05 0.048 ;
+ LAYER v1 ;
+ RECT -0.03 -0.038 0.03 0.038 ;
+ LAYER m2 ;
+ RECT -0.052 -0.038 0.052 0.038 ;
+END VIA1_60SX76_100V_76H
+
+VIA VIA1_60SX90_68V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.034 -0.055 0.034 0.055 ;
+ LAYER v1 ;
+ RECT -0.03 -0.045 0.03 0.045 ;
+ LAYER m2 ;
+ RECT -0.052 -0.045 0.052 0.045 ;
+END VIA1_60SX90_68V_90H
+
+VIA VIA1_60SX90_100V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.055 0.05 0.055 ;
+ LAYER v1 ;
+ RECT -0.03 -0.045 0.03 0.045 ;
+ LAYER m2 ;
+ RECT -0.052 -0.045 0.052 0.045 ;
+END VIA1_60SX90_100V_90H
+
+VIA VIA1_60SX108_68V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.034 -0.064 0.034 0.064 ;
+ LAYER v1 ;
+ RECT -0.03 -0.054 0.03 0.054 ;
+ LAYER m2 ;
+ RECT -0.052 -0.054 0.052 0.054 ;
+END VIA1_60SX108_68V_108H
+
+VIA VIA1_60SX108_100V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.064 0.05 0.064 ;
+ LAYER v1 ;
+ RECT -0.03 -0.054 0.03 0.054 ;
+ LAYER m2 ;
+ RECT -0.052 -0.054 0.052 0.054 ;
+END VIA1_60SX108_100V_108H
+
+VIA VIA1_70X70_100V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+ LAYER v1 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m2 ;
+ RECT -0.057 -0.038 0.057 0.038 ;
+END VIA1_70X70_100V_76H
+
+VIA VIA1_70X70_100V_90H
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+ LAYER v1 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m2 ;
+ RECT -0.057 -0.045 0.057 0.045 ;
+END VIA1_70X70_100V_90H
+
+VIA VIA1_70X70_100V_108H
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+ LAYER v1 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m2 ;
+ RECT -0.057 -0.054 0.057 0.054 ;
+END VIA1_70X70_100V_108H
+
+VIA VIA1_60SX44_68V_44H_DA
+ RESISTANCE 1.00 ;
+ LAYER m1 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER v1 ;
+ RECT -0.03 -0.022 0.03 0.022 ;
+ LAYER m2 ;
+ RECT -0.055 -0.022 0.055 0.022 ;
+END VIA1_60SX44_68V_44H_DA
+
+VIA VIA2_44X58S_44H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER v2 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m3 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA2_44X58S_44H_44V
+
+VIA VIA2_44X58S_56H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.034 -0.028 0.034 0.028 ;
+ LAYER v2 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m3 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA2_44X58S_56H_44V
+
+VIA VIA2_44X58S_76H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.034 -0.038 0.034 0.038 ;
+ LAYER v2 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m3 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA2_44X58S_76H_44V
+
+VIA VIA2_44X58S_90H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.034 -0.045 0.034 0.045 ;
+ LAYER v2 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m3 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA2_44X58S_90H_44V
+
+VIA VIA2_44X58S_108H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.034 -0.054 0.034 0.054 ;
+ LAYER v2 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m3 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA2_44X58S_108H_44V
+
+VIA VIA2_56X58S_44H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.04 -0.022 0.04 0.022 ;
+ LAYER v2 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m3 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA2_56X58S_44H_56V
+
+VIA VIA2_56X58S_56H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.04 -0.028 0.04 0.028 ;
+ LAYER v2 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m3 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA2_56X58S_56H_56V
+
+VIA VIA2_56X58S_76H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.04 -0.038 0.04 0.038 ;
+ LAYER v2 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m3 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA2_56X58S_76H_56V
+
+VIA VIA2_56X58S_90H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.04 -0.045 0.04 0.045 ;
+ LAYER v2 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m3 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA2_56X58S_90H_56V
+
+VIA VIA2_56X58S_108H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.04 -0.054 0.04 0.054 ;
+ LAYER v2 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m3 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA2_56X58S_108H_56V
+
+VIA VIA2_76X58S_44H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+ LAYER v2 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m3 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA2_76X58S_44H_76V
+
+VIA VIA2_76X58S_56H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+ LAYER v2 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m3 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA2_76X58S_56H_76V
+
+VIA VIA2_76X58S_76H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+ LAYER v2 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m3 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA2_76X58S_76H_76V
+
+VIA VIA2_76X58S_90H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+ LAYER v2 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m3 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA2_76X58S_90H_76V
+
+VIA VIA2_76X58S_108H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+ LAYER v2 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m3 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA2_76X58S_108H_76V
+
+VIA VIA2_90X58S_44H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.057 -0.022 0.057 0.022 ;
+ LAYER v2 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m3 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA2_90X58S_44H_90V
+
+VIA VIA2_90X58S_56H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.057 -0.028 0.057 0.028 ;
+ LAYER v2 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m3 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA2_90X58S_56H_90V
+
+VIA VIA2_90X58S_76H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.057 -0.038 0.057 0.038 ;
+ LAYER v2 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m3 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA2_90X58S_76H_90V
+
+VIA VIA2_90X58S_90H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.057 -0.045 0.057 0.045 ;
+ LAYER v2 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m3 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA2_90X58S_90H_90V
+
+VIA VIA2_90X58S_108H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.057 -0.054 0.057 0.054 ;
+ LAYER v2 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m3 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA2_90X58S_108H_90V
+
+VIA VIA2_108X58S_44H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.066 -0.022 0.066 0.022 ;
+ LAYER v2 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m3 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA2_108X58S_44H_108V
+
+VIA VIA2_108X58S_56H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.066 -0.028 0.066 0.028 ;
+ LAYER v2 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m3 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA2_108X58S_56H_108V
+
+VIA VIA2_108X58S_76H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.066 -0.038 0.066 0.038 ;
+ LAYER v2 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m3 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA2_108X58S_76H_108V
+
+VIA VIA2_108X58S_90H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.066 -0.045 0.066 0.045 ;
+ LAYER v2 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m3 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA2_108X58S_90H_108V
+
+VIA VIA2_108X58S_108H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.066 -0.054 0.066 0.054 ;
+ LAYER v2 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m3 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA2_108X58S_108H_108V
+
+VIA VIA2_70X70_56H_90V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.028 0.047 0.028 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA2_70X70_56H_90V
+
+VIA VIA2_70X70_56H_108V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.028 0.047 0.028 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA2_70X70_56H_108V
+
+VIA VIA2_70X70_76H_90V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.038 0.047 0.038 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA2_70X70_76H_90V
+
+VIA VIA2_70X70_76H_108V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.038 0.047 0.038 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA2_70X70_76H_108V
+
+VIA VIA2_70X70_90H_90V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.045 0.047 0.045 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA2_70X70_90H_90V
+
+VIA VIA2_70X70_90H_108V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.045 0.047 0.045 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA2_70X70_90H_108V
+
+VIA VIA2_70X70_108H_90V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.054 0.047 0.054 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA2_70X70_108H_90V
+
+VIA VIA2_70X70_108H_108V
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.047 -0.054 0.047 0.054 ;
+ LAYER v2 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m3 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA2_70X70_108H_108V
+
+VIA VIA2_44X58S_44H_44V_DA
+ RESISTANCE 1.00 ;
+ LAYER m2 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER v2 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m3 ;
+ RECT -0.022 -0.053 0.022 0.053 ;
+END VIA2_44X58S_44H_44V_DA
+
+VIA VIA3_58SX44_44V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.022 -0.034 0.022 0.034 ;
+ LAYER v3 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m4 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA3_58SX44_44V_44H
+
+VIA VIA3_58SX44_56V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.028 -0.034 0.028 0.034 ;
+ LAYER v3 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m4 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA3_58SX44_56V_44H
+
+VIA VIA3_58SX44_76V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.038 -0.034 0.038 0.034 ;
+ LAYER v3 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m4 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA3_58SX44_76V_44H
+
+VIA VIA3_58SX44_90V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.045 -0.034 0.045 0.034 ;
+ LAYER v3 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m4 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA3_58SX44_90V_44H
+
+VIA VIA3_58SX44_108V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.054 -0.034 0.054 0.034 ;
+ LAYER v3 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m4 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA3_58SX44_108V_44H
+
+VIA VIA3_58SX56_44V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.022 -0.04 0.022 0.04 ;
+ LAYER v3 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m4 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA3_58SX56_44V_56H
+
+VIA VIA3_58SX56_56V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.028 -0.04 0.028 0.04 ;
+ LAYER v3 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m4 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA3_58SX56_56V_56H
+
+VIA VIA3_58SX56_76V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.038 -0.04 0.038 0.04 ;
+ LAYER v3 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m4 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA3_58SX56_76V_56H
+
+VIA VIA3_58SX56_90V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.045 -0.04 0.045 0.04 ;
+ LAYER v3 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m4 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA3_58SX56_90V_56H
+
+VIA VIA3_58SX56_108V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.054 -0.04 0.054 0.04 ;
+ LAYER v3 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m4 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA3_58SX56_108V_56H
+
+VIA VIA3_58SX76_44V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+ LAYER v3 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m4 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA3_58SX76_44V_76H
+
+VIA VIA3_58SX76_56V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+ LAYER v3 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m4 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA3_58SX76_56V_76H
+
+VIA VIA3_58SX76_76V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+ LAYER v3 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m4 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA3_58SX76_76V_76H
+
+VIA VIA3_58SX76_90V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+ LAYER v3 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m4 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA3_58SX76_90V_76H
+
+VIA VIA3_58SX76_108V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+ LAYER v3 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m4 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA3_58SX76_108V_76H
+
+VIA VIA3_58SX90_44V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.022 -0.057 0.022 0.057 ;
+ LAYER v3 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m4 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA3_58SX90_44V_90H
+
+VIA VIA3_58SX90_56V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.028 -0.057 0.028 0.057 ;
+ LAYER v3 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m4 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA3_58SX90_56V_90H
+
+VIA VIA3_58SX90_76V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.038 -0.057 0.038 0.057 ;
+ LAYER v3 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m4 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA3_58SX90_76V_90H
+
+VIA VIA3_58SX90_90V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.045 -0.057 0.045 0.057 ;
+ LAYER v3 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m4 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA3_58SX90_90V_90H
+
+VIA VIA3_58SX90_108V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.054 -0.057 0.054 0.057 ;
+ LAYER v3 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m4 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA3_58SX90_108V_90H
+
+VIA VIA3_58SX108_44V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.022 -0.066 0.022 0.066 ;
+ LAYER v3 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m4 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA3_58SX108_44V_108H
+
+VIA VIA3_58SX108_56V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.028 -0.066 0.028 0.066 ;
+ LAYER v3 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m4 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA3_58SX108_56V_108H
+
+VIA VIA3_58SX108_76V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.038 -0.066 0.038 0.066 ;
+ LAYER v3 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m4 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA3_58SX108_76V_108H
+
+VIA VIA3_58SX108_90V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.045 -0.066 0.045 0.066 ;
+ LAYER v3 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m4 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA3_58SX108_90V_108H
+
+VIA VIA3_58SX108_108V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.054 -0.066 0.054 0.066 ;
+ LAYER v3 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m4 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA3_58SX108_108V_108H
+
+VIA VIA3_70X70_56V_90H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.028 -0.047 0.028 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA3_70X70_56V_90H
+
+VIA VIA3_70X70_56V_108H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.028 -0.047 0.028 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA3_70X70_56V_108H
+
+VIA VIA3_70X70_76V_90H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.038 -0.047 0.038 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA3_70X70_76V_90H
+
+VIA VIA3_70X70_76V_108H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.038 -0.047 0.038 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA3_70X70_76V_108H
+
+VIA VIA3_70X70_90V_90H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.045 -0.047 0.045 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA3_70X70_90V_90H
+
+VIA VIA3_70X70_90V_108H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.045 -0.047 0.045 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA3_70X70_90V_108H
+
+VIA VIA3_70X70_108V_90H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.054 -0.047 0.054 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA3_70X70_108V_90H
+
+VIA VIA3_70X70_108V_108H
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.054 -0.047 0.054 0.047 ;
+ LAYER v3 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m4 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA3_70X70_108V_108H
+
+VIA VIA3_58SX44_44V_44H_DA
+ RESISTANCE 1.00 ;
+ LAYER m3 ;
+ RECT -0.022 -0.034 0.022 0.034 ;
+ LAYER v3 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m4 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA3_58SX44_44V_44H_DA
+
+VIA VIA4_44X58S_44H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER v4 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m5 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA4_44X58S_44H_44V
+
+VIA VIA4_44X58S_56H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.034 -0.028 0.034 0.028 ;
+ LAYER v4 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m5 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA4_44X58S_56H_44V
+
+VIA VIA4_44X58S_76H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.034 -0.038 0.034 0.038 ;
+ LAYER v4 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m5 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA4_44X58S_76H_44V
+
+VIA VIA4_44X58S_90H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.034 -0.045 0.034 0.045 ;
+ LAYER v4 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m5 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA4_44X58S_90H_44V
+
+VIA VIA4_44X58S_108H_44V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.034 -0.054 0.034 0.054 ;
+ LAYER v4 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m5 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+END VIA4_44X58S_108H_44V
+
+VIA VIA4_56X58S_44H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.04 -0.022 0.04 0.022 ;
+ LAYER v4 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m5 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA4_56X58S_44H_56V
+
+VIA VIA4_56X58S_56H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.04 -0.028 0.04 0.028 ;
+ LAYER v4 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m5 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA4_56X58S_56H_56V
+
+VIA VIA4_56X58S_76H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.04 -0.038 0.04 0.038 ;
+ LAYER v4 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m5 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA4_56X58S_76H_56V
+
+VIA VIA4_56X58S_90H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.04 -0.045 0.04 0.045 ;
+ LAYER v4 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m5 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA4_56X58S_90H_56V
+
+VIA VIA4_56X58S_108H_56V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.04 -0.054 0.04 0.054 ;
+ LAYER v4 ;
+ RECT -0.028 -0.029 0.028 0.029 ;
+ LAYER m5 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+END VIA4_56X58S_108H_56V
+
+VIA VIA4_76X58S_44H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+ LAYER v4 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m5 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA4_76X58S_44H_76V
+
+VIA VIA4_76X58S_56H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+ LAYER v4 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m5 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA4_76X58S_56H_76V
+
+VIA VIA4_76X58S_76H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+ LAYER v4 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m5 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA4_76X58S_76H_76V
+
+VIA VIA4_76X58S_90H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+ LAYER v4 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m5 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA4_76X58S_90H_76V
+
+VIA VIA4_76X58S_108H_76V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+ LAYER v4 ;
+ RECT -0.038 -0.029 0.038 0.029 ;
+ LAYER m5 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+END VIA4_76X58S_108H_76V
+
+VIA VIA4_90X58S_44H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.057 -0.022 0.057 0.022 ;
+ LAYER v4 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m5 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA4_90X58S_44H_90V
+
+VIA VIA4_90X58S_56H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.057 -0.028 0.057 0.028 ;
+ LAYER v4 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m5 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA4_90X58S_56H_90V
+
+VIA VIA4_90X58S_76H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.057 -0.038 0.057 0.038 ;
+ LAYER v4 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m5 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA4_90X58S_76H_90V
+
+VIA VIA4_90X58S_90H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.057 -0.045 0.057 0.045 ;
+ LAYER v4 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m5 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA4_90X58S_90H_90V
+
+VIA VIA4_90X58S_108H_90V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.057 -0.054 0.057 0.054 ;
+ LAYER v4 ;
+ RECT -0.045 -0.029 0.045 0.029 ;
+ LAYER m5 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+END VIA4_90X58S_108H_90V
+
+VIA VIA4_108X58S_44H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.066 -0.022 0.066 0.022 ;
+ LAYER v4 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m5 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA4_108X58S_44H_108V
+
+VIA VIA4_108X58S_56H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.066 -0.028 0.066 0.028 ;
+ LAYER v4 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m5 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA4_108X58S_56H_108V
+
+VIA VIA4_108X58S_76H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.066 -0.038 0.066 0.038 ;
+ LAYER v4 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m5 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA4_108X58S_76H_108V
+
+VIA VIA4_108X58S_90H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.066 -0.045 0.066 0.045 ;
+ LAYER v4 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m5 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA4_108X58S_90H_108V
+
+VIA VIA4_108X58S_108H_108V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.066 -0.054 0.066 0.054 ;
+ LAYER v4 ;
+ RECT -0.054 -0.029 0.054 0.029 ;
+ LAYER m5 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+END VIA4_108X58S_108H_108V
+
+VIA VIA4_70X70_56H_90V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.028 0.047 0.028 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA4_70X70_56H_90V
+
+VIA VIA4_70X70_56H_108V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.028 0.047 0.028 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA4_70X70_56H_108V
+
+VIA VIA4_70X70_56H_200V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.028 0.047 0.028 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.1 -0.056 0.1 0.056 ;
+END VIA4_70X70_56H_200V
+
+VIA VIA4_70X70_76H_90V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.038 0.047 0.038 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA4_70X70_76H_90V
+
+VIA VIA4_70X70_76H_108V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.038 0.047 0.038 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA4_70X70_76H_108V
+
+VIA VIA4_70X70_76H_200V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.038 0.047 0.038 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.1 -0.056 0.1 0.056 ;
+END VIA4_70X70_76H_200V
+
+VIA VIA4_70X70_90H_90V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.045 0.047 0.045 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA4_70X70_90H_90V
+
+VIA VIA4_70X70_90H_108V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.045 0.047 0.045 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA4_70X70_90H_108V
+
+VIA VIA4_70X70_90H_200V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.045 0.047 0.045 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.1 -0.056 0.1 0.056 ;
+END VIA4_70X70_90H_200V
+
+VIA VIA4_70X70_108H_90V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.054 0.047 0.054 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.045 -0.056 0.045 0.056 ;
+END VIA4_70X70_108H_90V
+
+VIA VIA4_70X70_108H_108V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.054 0.047 0.054 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.054 -0.056 0.054 0.056 ;
+END VIA4_70X70_108H_108V
+
+VIA VIA4_70X70_108H_200V
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.047 -0.054 0.047 0.054 ;
+ LAYER v4 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m5 ;
+ RECT -0.1 -0.056 0.1 0.056 ;
+END VIA4_70X70_108H_200V
+
+VIA VIA4_90X90_108H_200V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.057 -0.054 0.057 0.054 ;
+ LAYER v4 ;
+ RECT -0.045 -0.045 0.045 0.045 ;
+ LAYER m5 ;
+ RECT -0.1 -0.085 0.1 0.085 ;
+END VIA4_90X90_108H_200V
+
+VIA VIA4_44X58S_44H_44V_DA
+ RESISTANCE 1.00 ;
+ LAYER m4 ;
+ RECT -0.034 -0.022 0.034 0.022 ;
+ LAYER v4 ;
+ RECT -0.022 -0.029 0.022 0.029 ;
+ LAYER m5 ;
+ RECT -0.022 -0.053 0.022 0.053 ;
+END VIA4_44X58S_44H_44V_DA
+
+VIA VIA5_58SX44_44V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.022 -0.034 0.022 0.034 ;
+ LAYER v5 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m6 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA5_58SX44_44V_44H
+
+VIA VIA5_58SX44_56V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.034 0.028 0.034 ;
+ LAYER v5 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m6 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA5_58SX44_56V_44H
+
+VIA VIA5_58SX44_76V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.034 0.038 0.034 ;
+ LAYER v5 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m6 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA5_58SX44_76V_44H
+
+VIA VIA5_58SX44_90V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.034 0.045 0.034 ;
+ LAYER v5 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m6 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA5_58SX44_90V_44H
+
+VIA VIA5_58SX44_108V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.034 0.054 0.034 ;
+ LAYER v5 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m6 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA5_58SX44_108V_44H
+
+VIA VIA5_58SX44_200V_44H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.034 0.1 0.034 ;
+ LAYER v5 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m6 ;
+ RECT -0.05 -0.022 0.05 0.022 ;
+END VIA5_58SX44_200V_44H
+
+VIA VIA5_58SX56_44V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.022 -0.04 0.022 0.04 ;
+ LAYER v5 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m6 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA5_58SX56_44V_56H
+
+VIA VIA5_58SX56_56V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.04 0.028 0.04 ;
+ LAYER v5 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m6 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA5_58SX56_56V_56H
+
+VIA VIA5_58SX56_76V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.04 0.038 0.04 ;
+ LAYER v5 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m6 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA5_58SX56_76V_56H
+
+VIA VIA5_58SX56_90V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.04 0.045 0.04 ;
+ LAYER v5 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m6 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA5_58SX56_90V_56H
+
+VIA VIA5_58SX56_108V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.04 0.054 0.04 ;
+ LAYER v5 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m6 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA5_58SX56_108V_56H
+
+VIA VIA5_58SX56_200V_56H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.04 0.1 0.04 ;
+ LAYER v5 ;
+ RECT -0.029 -0.028 0.029 0.028 ;
+ LAYER m6 ;
+ RECT -0.05 -0.028 0.05 0.028 ;
+END VIA5_58SX56_200V_56H
+
+VIA VIA5_58SX76_44V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.022 -0.05 0.022 0.05 ;
+ LAYER v5 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m6 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA5_58SX76_44V_76H
+
+VIA VIA5_58SX76_56V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.05 0.028 0.05 ;
+ LAYER v5 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m6 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA5_58SX76_56V_76H
+
+VIA VIA5_58SX76_76V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.05 0.038 0.05 ;
+ LAYER v5 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m6 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA5_58SX76_76V_76H
+
+VIA VIA5_58SX76_90V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.05 0.045 0.05 ;
+ LAYER v5 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m6 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA5_58SX76_90V_76H
+
+VIA VIA5_58SX76_108V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.05 0.054 0.05 ;
+ LAYER v5 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m6 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA5_58SX76_108V_76H
+
+VIA VIA5_58SX76_200V_76H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.05 0.1 0.05 ;
+ LAYER v5 ;
+ RECT -0.029 -0.038 0.029 0.038 ;
+ LAYER m6 ;
+ RECT -0.05 -0.038 0.05 0.038 ;
+END VIA5_58SX76_200V_76H
+
+VIA VIA5_58SX90_44V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.022 -0.057 0.022 0.057 ;
+ LAYER v5 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m6 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA5_58SX90_44V_90H
+
+VIA VIA5_58SX90_56V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.057 0.028 0.057 ;
+ LAYER v5 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m6 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA5_58SX90_56V_90H
+
+VIA VIA5_58SX90_76V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.057 0.038 0.057 ;
+ LAYER v5 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m6 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA5_58SX90_76V_90H
+
+VIA VIA5_58SX90_90V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.057 0.045 0.057 ;
+ LAYER v5 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m6 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA5_58SX90_90V_90H
+
+VIA VIA5_58SX90_108V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.057 0.054 0.057 ;
+ LAYER v5 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m6 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA5_58SX90_108V_90H
+
+VIA VIA5_58SX90_200V_90H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.057 0.1 0.057 ;
+ LAYER v5 ;
+ RECT -0.029 -0.045 0.029 0.045 ;
+ LAYER m6 ;
+ RECT -0.05 -0.045 0.05 0.045 ;
+END VIA5_58SX90_200V_90H
+
+VIA VIA5_58SX108_44V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.022 -0.066 0.022 0.066 ;
+ LAYER v5 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m6 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA5_58SX108_44V_108H
+
+VIA VIA5_58SX108_56V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.066 0.028 0.066 ;
+ LAYER v5 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m6 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA5_58SX108_56V_108H
+
+VIA VIA5_58SX108_76V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.066 0.038 0.066 ;
+ LAYER v5 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m6 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA5_58SX108_76V_108H
+
+VIA VIA5_58SX108_90V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.066 0.045 0.066 ;
+ LAYER v5 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m6 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA5_58SX108_90V_108H
+
+VIA VIA5_58SX108_108V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.066 0.054 0.066 ;
+ LAYER v5 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m6 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA5_58SX108_108V_108H
+
+VIA VIA5_58SX108_200V_108H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.066 0.1 0.066 ;
+ LAYER v5 ;
+ RECT -0.029 -0.054 0.029 0.054 ;
+ LAYER m6 ;
+ RECT -0.05 -0.054 0.05 0.054 ;
+END VIA5_58SX108_200V_108H
+
+VIA VIA5_58SX160_44V_160H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.022 -0.092 0.022 0.092 ;
+ LAYER v5 ;
+ RECT -0.029 -0.08 0.029 0.08 ;
+ LAYER m6 ;
+ RECT -0.05 -0.08 0.05 0.08 ;
+END VIA5_58SX160_44V_160H
+
+VIA VIA5_58SX160_56V_160H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.092 0.028 0.092 ;
+ LAYER v5 ;
+ RECT -0.029 -0.08 0.029 0.08 ;
+ LAYER m6 ;
+ RECT -0.05 -0.08 0.05 0.08 ;
+END VIA5_58SX160_56V_160H
+
+VIA VIA5_58SX160_76V_160H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.092 0.038 0.092 ;
+ LAYER v5 ;
+ RECT -0.029 -0.08 0.029 0.08 ;
+ LAYER m6 ;
+ RECT -0.05 -0.08 0.05 0.08 ;
+END VIA5_58SX160_76V_160H
+
+VIA VIA5_58SX160_90V_160H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.092 0.045 0.092 ;
+ LAYER v5 ;
+ RECT -0.029 -0.08 0.029 0.08 ;
+ LAYER m6 ;
+ RECT -0.05 -0.08 0.05 0.08 ;
+END VIA5_58SX160_90V_160H
+
+VIA VIA5_58SX160_108V_160H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.092 0.054 0.092 ;
+ LAYER v5 ;
+ RECT -0.029 -0.08 0.029 0.08 ;
+ LAYER m6 ;
+ RECT -0.05 -0.08 0.05 0.08 ;
+END VIA5_58SX160_108V_160H
+
+VIA VIA5_58SX160_200V_160H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.092 0.1 0.092 ;
+ LAYER v5 ;
+ RECT -0.029 -0.08 0.029 0.08 ;
+ LAYER m6 ;
+ RECT -0.05 -0.08 0.05 0.08 ;
+END VIA5_58SX160_200V_160H
+
+VIA VIA5_70X70_56V_90H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.047 0.028 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA5_70X70_56V_90H
+
+VIA VIA5_70X70_56V_108H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.047 0.028 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA5_70X70_56V_108H
+
+VIA VIA5_70X70_56V_160H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.047 0.028 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.08 0.056 0.08 ;
+END VIA5_70X70_56V_160H
+
+VIA VIA5_70X70_56V_200H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.047 0.028 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.1 0.056 0.1 ;
+END VIA5_70X70_56V_200H
+
+VIA VIA5_70X70_56V_400H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.028 -0.047 0.028 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.2 0.056 0.2 ;
+END VIA5_70X70_56V_400H
+
+VIA VIA5_70X70_76V_90H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.047 0.038 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA5_70X70_76V_90H
+
+VIA VIA5_70X70_76V_108H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.047 0.038 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA5_70X70_76V_108H
+
+VIA VIA5_70X70_76V_160H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.047 0.038 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.08 0.056 0.08 ;
+END VIA5_70X70_76V_160H
+
+VIA VIA5_70X70_76V_200H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.047 0.038 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.1 0.056 0.1 ;
+END VIA5_70X70_76V_200H
+
+VIA VIA5_70X70_76V_400H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.038 -0.047 0.038 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.2 0.056 0.2 ;
+END VIA5_70X70_76V_400H
+
+VIA VIA5_70X70_90V_90H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.047 0.045 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA5_70X70_90V_90H
+
+VIA VIA5_70X70_90V_108H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.047 0.045 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA5_70X70_90V_108H
+
+VIA VIA5_70X70_90V_160H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.047 0.045 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.08 0.056 0.08 ;
+END VIA5_70X70_90V_160H
+
+VIA VIA5_70X70_90V_200H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.047 0.045 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.1 0.056 0.1 ;
+END VIA5_70X70_90V_200H
+
+VIA VIA5_70X70_90V_400H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.045 -0.047 0.045 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.2 0.056 0.2 ;
+END VIA5_70X70_90V_400H
+
+VIA VIA5_70X70_108V_90H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.047 0.054 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA5_70X70_108V_90H
+
+VIA VIA5_70X70_108V_108H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.047 0.054 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA5_70X70_108V_108H
+
+VIA VIA5_70X70_108V_160H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.047 0.054 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.08 0.056 0.08 ;
+END VIA5_70X70_108V_160H
+
+VIA VIA5_70X70_108V_200H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.047 0.054 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.1 0.056 0.1 ;
+END VIA5_70X70_108V_200H
+
+VIA VIA5_70X70_108V_400H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.047 0.054 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.2 0.056 0.2 ;
+END VIA5_70X70_108V_400H
+
+VIA VIA5_70X70_200V_90H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.047 0.1 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.045 0.056 0.045 ;
+END VIA5_70X70_200V_90H
+
+VIA VIA5_70X70_200V_108H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.047 0.1 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.054 0.056 0.054 ;
+END VIA5_70X70_200V_108H
+
+VIA VIA5_70X70_200V_160H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.047 0.1 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.08 0.056 0.08 ;
+END VIA5_70X70_200V_160H
+
+VIA VIA5_70X70_200V_200H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.047 0.1 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.1 0.056 0.1 ;
+END VIA5_70X70_200V_200H
+
+VIA VIA5_70X70_200V_400H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.047 0.1 0.047 ;
+ LAYER v5 ;
+ RECT -0.035 -0.035 0.035 0.035 ;
+ LAYER m6 ;
+ RECT -0.056 -0.2 0.056 0.2 ;
+END VIA5_70X70_200V_400H
+
+VIA VIA5_90X90_108V_160H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.057 0.054 0.057 ;
+ LAYER v5 ;
+ RECT -0.045 -0.045 0.045 0.045 ;
+ LAYER m6 ;
+ RECT -0.085 -0.08 0.085 0.08 ;
+END VIA5_90X90_108V_160H
+
+VIA VIA5_90X90_108V_200H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.057 0.054 0.057 ;
+ LAYER v5 ;
+ RECT -0.045 -0.045 0.045 0.045 ;
+ LAYER m6 ;
+ RECT -0.085 -0.1 0.085 0.1 ;
+END VIA5_90X90_108V_200H
+
+VIA VIA5_90X90_108V_400H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.054 -0.057 0.054 0.057 ;
+ LAYER v5 ;
+ RECT -0.045 -0.045 0.045 0.045 ;
+ LAYER m6 ;
+ RECT -0.085 -0.2 0.085 0.2 ;
+END VIA5_90X90_108V_400H
+
+VIA VIA5_90X90_200V_160H
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.057 0.1 0.057 ;
+ LAYER v5 ;
+ RECT -0.045 -0.045 0.045 0.045 ;
+ LAYER m6 ;
+ RECT -0.085 -0.08 0.085 0.08 ;
+END VIA5_90X90_200V_160H
+
+VIA VIA5_90X90_200V_200H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.057 0.1 0.057 ;
+ LAYER v5 ;
+ RECT -0.045 -0.045 0.045 0.045 ;
+ LAYER m6 ;
+ RECT -0.085 -0.1 0.085 0.1 ;
+END VIA5_90X90_200V_200H
+
+VIA VIA5_90X90_200V_400H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.1 -0.057 0.1 0.057 ;
+ LAYER v5 ;
+ RECT -0.045 -0.045 0.045 0.045 ;
+ LAYER m6 ;
+ RECT -0.085 -0.2 0.085 0.2 ;
+END VIA5_90X90_200V_400H
+
+VIA VIA5_58SX44_44V_44H_DA
+ RESISTANCE 1.00 ;
+ LAYER m5 ;
+ RECT -0.022 -0.034 0.022 0.034 ;
+ LAYER v5 ;
+ RECT -0.029 -0.022 0.029 0.022 ;
+ LAYER m6 ;
+ RECT -0.053 -0.022 0.053 0.022 ;
+END VIA5_58SX44_44V_44H_DA
+
+VIA VIA6_NOTUSED_DEFAULT
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.16 -0.042 0.16 0.042 ;
+ LAYER v6 ;
+ RECT -0.1 -0.022 0.1 0.022 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_NOTUSED_DEFAULT
+
+VIA VIA6_200X120_160H_540V
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.16 -0.08 0.16 0.08 ;
+ LAYER v6 ;
+ RECT -0.1 -0.06 0.1 0.06 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_200X120_160H_540V
+
+VIA VIA6_200X120_160H_540V_44
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.16 -0.08 0.16 0.08 ;
+ LAYER v6 ;
+ RECT -0.1 -0.06 0.1 0.06 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_200X120_160H_540V_44
+
+VIA VIA6_200X120_200H_540V
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.16 -0.1 0.16 0.1 ;
+ LAYER v6 ;
+ RECT -0.1 -0.06 0.1 0.06 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_200X120_200H_540V
+
+VIA VIA6_200X120_400H_540V
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.16 -0.2 0.16 0.2 ;
+ LAYER v6 ;
+ RECT -0.1 -0.06 0.1 0.06 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_200X120_400H_540V
+
+VIA VIA6_400X120_160H_540V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.26 -0.08 0.26 0.08 ;
+ LAYER v6 ;
+ RECT -0.2 -0.06 0.2 0.06 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_400X120_160H_540V
+
+VIA VIA6_400X120_200H_540V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.26 -0.1 0.26 0.1 ;
+ LAYER v6 ;
+ RECT -0.2 -0.06 0.2 0.06 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_400X120_200H_540V
+
+VIA VIA6_400X120_400H_540V
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m6 ;
+ RECT -0.26 -0.2 0.26 0.2 ;
+ LAYER v6 ;
+ RECT -0.2 -0.06 0.2 0.06 ;
+ LAYER m7 ;
+ RECT -0.27 -0.12 0.27 0.12 ;
+END VIA6_400X120_400H_540V
+
+VIA VIA7_800X1850_1080V_3050H
+ RESISTANCE 1.00 ;
+ LAYER m7 ;
+ RECT -0.54 -1.065 0.54 1.065 ;
+ LAYER v7 ;
+ RECT -0.4 -0.925 0.4 0.925 ;
+ LAYER m8 ;
+ RECT -1.0 -1.525 1.0 1.525 ;
+END VIA7_800X1850_1080V_3050H
+
+VIA VIA7_800X3700_1080V_4900H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m7 ;
+ RECT -0.54 -1.99 0.54 1.99 ;
+ LAYER v7 ;
+ RECT -0.4 -1.85 0.4 1.85 ;
+ LAYER m8 ;
+ RECT -1.0 -2.45 1.0 2.45 ;
+END VIA7_800X3700_1080V_4900H
+
+VIA VIA7_800X7400_1080V_8600H
+  DEFAULT
+ RESISTANCE 1.00 ;
+ LAYER m7 ;
+ RECT -0.54 -3.84 0.54 3.84 ;
+ LAYER v7 ;
+ RECT -0.4 -3.7 0.4 3.7 ;
+ LAYER m8 ;
+ RECT -1.0 -4.3 1.0 4.3 ;
+END VIA7_800X7400_1080V_8600H
+
+VIA TV1_30000X6000_12000H_55000V
+ RESISTANCE 1.00 ;
+ LAYER m8 ;
+ RECT -18.0 -6.0 18.0 6.0 ;
+ LAYER tv1 ;
+ RECT -15.0 -3.0 15.0 3.0 ;
+ LAYER c4 ;
+ RECT -27.5 -15.5 27.5 15.5 ;
+END TV1_30000X6000_12000H_55000V
+
+VIARULE V1_ABC_RULE GENERATE
+  DEFAULT
+  LAYER m1 ;
+    ENCLOSURE 0.044 0.0 ;
+  LAYER m2 ;
+    ENCLOSURE 0.044 0.0 ;
+  LAYER v1 ;
+    RECT -0.03 -0.022 0.03 0.022 ;
+    SPACING 0.126 BY 0.126 ;
+END V1_ABC_RULE
+
+SITE unit
+ CLASS CORE ;
+ SIZE 0.108 BY 0.63 ;
+ SYMMETRY X Y ;
+END unit
+
+SITE core
+ CLASS CORE ;
+ SIZE 0.108 BY 0.63 ;
+ SYMMETRY X Y ;
+END core
+
+SITE core2h
+ CLASS CORE ;
+ SIZE 0.108 BY 1.26 ;
+ SYMMETRY X Y ;
+END core2h
+
+SITE bonuscore
+ CLASS CORE ;
+ SIZE 0.432 BY 0.63 ;
+ SYMMETRY X Y ;
+END bonuscore
+
+SITE core144
+ CLASS CORE ;
+ SIZE 0.144 BY 0.63 ;
+ SYMMETRY X Y ;
+END core144
+
+SITE bonuscore144
+ CLASS CORE ;
+ SIZE 0.576 BY 0.63 ;
+ SYMMETRY X Y ;
+END bonuscore144
+
+SITE core2h144
+ CLASS CORE ;
+ SIZE 0.144 BY 1.26 ;
+ SYMMETRY X Y ;
+END core2h144
+
+
+
+#PROPERTYDEFINITIONS
+#  LIBRARY LEF58_MAXVIASTACK STRING "
+#  MAXVIASTACK 2 WITHIN v0 0.005 v1 0.005 EXCEPTPGNET RANGE m0 m3 ;
+#  MAXVIASTACK 3 WITHIN v1 0.005 v2 0.005 v3 0.005 EXCEPTPGNET RANGE m1 m5 ;        
+#END PROPERTYDEFINITIONS
+
+
+
+END LIBRARY

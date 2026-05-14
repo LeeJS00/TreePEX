@@ -1,0 +1,29 @@
+# Python machinery
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Logs & temporaries
+*.log
+*.tmp
+.pytest_cache/
+
+# Runtime outputs (regenerable; users can run `pex_cold.py` to recreate)
+outputs/*
+
+# Tile cache (external; site-specific path via TREEPEX_TILE_CACHE_ROOT)
+# Not stored in repo. Document acquisition in docs/.
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Numba cache
+__numba_cache__/
+
+# Claude Code local state
+.claude/
