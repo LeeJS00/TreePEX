@@ -86,6 +86,51 @@ features (purely geometric, PDK-agnostic).
 This means the **6.86 % ASAP7 mean MAPE is the floor**, not the ceiling — fixing
 the layer-bucket mapping is expected to push ASAP7 closer to intel22's 5 % range.
 
+## V3 layer-fix probe (2026-05-14 → 2026-05-15, partial)
+
+**Root cause confirmed.** The current `feature_dataset.py::_scan_design_geometry`
+calls `segments[0].get("layer_idx", 0)` but `DefStreamParser` yields segments
+with key `"layer"` (string like `"m1"` / `"M1"`), not `"layer_idx"` — so all
+ASAP7 cuboids fall back to `layer_idx = 0` → clipped to 1 in the histogram. The
+archive `pex_v3/src/baselines/feature_dataset.py` already had the fix (a
+`re.compile(r"[mM](\d+)")` regex over `seg["layer"]`); it was lost in the
+tv80s_autonomous_2026_05_02 refactor. ASAP7 uses **uppercase** layer names in
+DEF (`M2`, `M3`, ...) while intel22 uses **lowercase** (`m2`, `m3`, ...); the
+regex handles both. Power-net detection (`VDD`/`VSS` vs `vcc`/`vssx`) is
+case-insensitive via `.lower()` — not the bug.
+
+**V3 partial smoke** (8/9 train designs, missing ldpc whose feature build
+projected ~10+ hr at 0.5–1.0 s/net; nova was an additional ~28 hr ceiling and
+was killed):
+
+| Feature | v1 (committed) | v3 partial (8 train designs) | Δ |
+|---|---:|---:|---:|
+| layer_hist_M2 nonzero% | 0 % | 75.4 % | populated ✓ |
+| layer_hist_M3 nonzero% | 0 % | 21.0 % | populated ✓ |
+| vss_shield_M6_plus nonzero% | 0 % | 92.8 % | populated ✓ |
+| density_M1_M3 nonzero% | 0 % | 100 % | populated ✓ |
+| MAPE_gnd (tv80s_x1) | 20.17 % | **19.64 %** | −0.53 pp |
+| MAPE_cpl (tv80s_x1) | 9.10 % | **8.97 %** | −0.13 pp |
+| R² (tv80s_x1) | 0.9801 | **0.9893** | +1.0 pp |
+| **MAPE_tot** (tv80s_x1) | **6.682 %** | 6.885 % | **+0.20 pp** |
+
+**Interpretation.** Per-channel layer features deliver the expected
+improvement (gnd −0.5 pp, cpl −0.1 pp, R² +1.0 pp). The total MAPE
+regressed slightly — likely because **the v3 partial run trained on
+8/9 train designs (ldpc missing)**, costing more in raw training data
+than the layer fix gains. A full v3 retrain with all 9 train designs is
+expected to be net positive but was not completed (compute cost ≈ 24 hr
+for the longest design).
+
+**Status.** v1 6.68 % / 7.03 % remains the committed canonical ASAP7
+baseline. v3 partial weights archived at
+`PINNPEX/TreePEX/models_asap7_v3_partial/` (not pushed). Future work:
+complete the ldpc + nova feature extraction overnight, retrain, and
+report the full v3 numbers. Patched `feature_dataset.py::_scan_design_geometry`
+in `experiments/tv80s_autonomous_2026_05_02/src/baselines/feature_dataset.py`
+left in place (regex fix matches both intel22 lowercase and ASAP7 uppercase
+layer names; backward-compatible for any future re-extraction).
+
 ## Reproduction
 
 ```bash
