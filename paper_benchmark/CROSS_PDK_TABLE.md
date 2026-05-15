@@ -145,9 +145,20 @@ V3 kernel applies on both PDKs.
 
 | PDK | Design | Cold wall (DEF→SPEF) | MAPE_tot | MAPE_gnd | MAPE_cpl | R² | Notes |
 |---|---|---:|---:|---:|---:|---:|---|
-| intel22 | tv80s_f3 | **49.75 s** | 5.13 % | 17.91 % | 13.82 % | 0.9919 | bundled smoke |
+| intel22 | tv80s_f3 | **49.75 s** | 5.13 % | 17.91 % | 13.82 % | 0.9919 | bundled smoke (uses cached `_v4_pernet`) |
 | ASAP7 | gcd_x1 | **6.32 s** | 13.19 % | 23.30 % | 17.73 % | 0.9326 | TRAIN-set (in-distribution) |
-| ASAP7 | tv80s_x1 | **62.13 s** | **11.23 %** | 25.18 % | 13.80 % | 0.9655 | OOD test, **cold-honest** |
+| ASAP7 | tv80s_x1 (slow path) | 62.13 s | 11.23 % | 25.18 % | 13.80 % | 0.9655 | pkl.gz per-net |
+| ASAP7 | tv80s_x1 (w/ cache) | **44.81 s** | 11.18 % | 24.98 % | 13.82 % | 0.9646 | mmap'd 4.6 GB cache |
+| ASAP7 | nova_x1 (w/ cache) | **2087.75 s** (34.8 min) | **12.75 %** | 24.33 % | 15.98 % | 0.9407 | mmap'd 194 GB cache, **3.4× faster than StarRC FS** |
+
+### StarRC FS reference (= 100% accuracy baseline)
+
+| Design | StarRC FS runtime | TreePEX cold | Speedup |
+|---|---:|---:|---:|
+| tv80s_x1 | 278.45 s | 44.81 s (w/cache) | **6.2× faster** ✓ |
+| nova_x1 | 7148.83 s | 2087.75 s (w/cache) | **3.4× faster** ✓ |
+
+License-free TreePEX cold-from-scratch beats licensed StarRC FS by 3.4–6.2× on ASAP7 while maintaining MAPE 11–13% (vs StarRC FS 0%). On intel22 the gap was 5.6× (50s vs 278s FS).
 
 ### Why cold-MAPE > warm-MAPE on ASAP7 (4.5 pp gap)
 

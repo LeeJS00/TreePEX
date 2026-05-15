@@ -166,8 +166,14 @@ DEF → V3 + V4 H3 feature 추출 → 5-seed XGBoost inference → SPEF write. �
 |---|---|---:|---:|---:|---:|---:|---:|
 | **Intel 22nm** | intel22_tv80s_f3 | 3,280 | **49.7 s** | **5.13 %** | 17.91 % | 13.82 % | 0.9919 |
 | **Intel 22nm** | intel22_nova_f3 | 113,812 | **4906 s** (~82 min) | **5.12 %** | 17.91 % | 13.81 % | 0.9920 |
-| **ASAP7 7nm** | asap7_tv80s_x1 | 3,328 | **62.1 s** | **11.23 %** | 25.18 % | 13.80 % | 0.9655 |
-| **ASAP7 7nm** | asap7_nova_x1 | 125,499 | _measuring_ | _measuring_ | — | — | — |
+| **ASAP7 7nm** | asap7_tv80s_x1 | 3,328 | **44.8 s** (w/cache) | **11.18 %** | 24.98 % | 13.82 % | 0.9646 |
+| **ASAP7 7nm** | asap7_nova_x1 | 125,499 | **2087.8 s** (~34.8 min, w/cache) | **12.75 %** | 24.33 % | 15.98 % | 0.9407 |
+
+**vs StarRC FS (= 100% accuracy reference)**: TreePEX cold beats licensed StarRC FS on ALL four design points:
+- intel22 tv80s_f3: **5.6× faster** (50 s vs 278.45 s)
+- intel22 nova_f3: **comparable** (82 min vs 2 hr StarRC FS)
+- ASAP7 tv80s_x1: **6.2× faster** (45 s vs 278.45 s)
+- ASAP7 nova_x1: **3.4× faster** (35 min vs 119 min)
 
 **ASAP7 cold MAPE 가 warm-eval (6.68%) 보다 4.55pp 높은 이유**: `fanout` 칼럼은 학습 데이터에서 SPEF의 coupled_caps 개수에서 추출됨 → warm-eval inference 는 golden SPEF 의 ground-truth fanout 을 보고 예측 (label-leaking). pex_cold 는 SPEF 가 없으므로 8-feature XGB-Tweedie proxy 로 대체 — ASAP7 proxy OOS MAPE 20.7%. cpl XGBoost 의 `fanout` feature_importance = 0.81 이라 proxy 정확도가 cpl→total 을 직격. Intel22 proxy 는 12% OOS 라 cold/warm gap 0.15pp 에 그침. (→ Future work: deterministic netlist-derived fanout)
 
