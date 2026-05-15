@@ -148,8 +148,10 @@ V3 kernel applies on both PDKs.
 | intel22 | tv80s_f3 | **49.75 s** | 5.13 % | 17.91 % | 13.82 % | 0.9919 | bundled smoke (uses cached `_v4_pernet`) |
 | ASAP7 | gcd_x1 | **6.32 s** | 13.19 % | 23.30 % | 17.73 % | 0.9326 | TRAIN-set (in-distribution) |
 | ASAP7 | tv80s_x1 (slow path) | 62.13 s | 11.23 % | 25.18 % | 13.80 % | 0.9655 | pkl.gz per-net |
-| ASAP7 | tv80s_x1 (w/ cache) | **44.81 s** | 11.18 % | 24.98 % | 13.82 % | 0.9646 | mmap'd 4.6 GB cache |
-| ASAP7 | nova_x1 (w/ cache) | **2087.75 s** (34.8 min) | **12.75 %** | 24.33 % | 15.98 % | 0.9407 | mmap'd 194 GB cache, **3.4× faster than StarRC FS** |
+| ASAP7 | tv80s_x1 (v1 model, w/ cache) | 44.81 s | 11.18 % | 24.98 % | 13.82 % | 0.9646 | mmap'd 4.6 GB cache |
+| ASAP7 | nova_x1 (v1 model, w/ cache) | 2087.75 s (34.8 min) | 12.75 % | 24.33 % | 15.98 % | 0.9407 | mmap'd 194 GB cache, 3.4× faster than StarRC FS |
+| **ASAP7** | **tv80s_x1 (v3 model)** | **48.03 s** | **10.66 %** | 20.59 % | 14.41 % | 0.9666 | **TRAIN_9 v3 features (layer fix), -0.52pp** |
+| **ASAP7** | **nova_x1 (v3 model)** | **2038.63 s** (34.0 min) | **11.34 %** | 22.13 % | 15.19 % | 0.9286 | **−1.42pp vs v1**, 3.5× faster than StarRC FS |
 
 ### StarRC FS reference (= 100% accuracy baseline)
 
