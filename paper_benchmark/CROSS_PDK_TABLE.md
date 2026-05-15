@@ -131,6 +131,68 @@ in `experiments/tv80s_autonomous_2026_05_02/src/baselines/feature_dataset.py`
 left in place (regex fix matches both intel22 lowercase and ASAP7 uppercase
 layer names; backward-compatible for any future re-extraction).
 
+## True cold-from-scratch runtime (2026-05-15)
+
+**Correction**: The warm-eval numbers above (tv80s 6.68 % / 10.4 s, nova 7.03 %
+/ 34 s) use **pre-computed feature CSVs** and exclude the V3 + V4 feature
+extraction time. For honest paper reporting, the cold-from-scratch wall —
+including DEF parse + V3 + V4 H3 + inference + SPEF write — is what
+should be compared against intel22's published cold numbers.
+
+`pex_cold.py` was ported to ASAP7 (2026-05-15) — adds `--pdk {intel22, asap7}`
+flag, swaps `MODELS_DIR` / `TILE_CACHE_ROOT` / PDK files. Same Round 4 njit
+V3 kernel applies on both PDKs.
+
+| PDK | Design | Cold wall (DEF→SPEF) | MAPE_tot | MAPE_gnd | MAPE_cpl | R² | Notes |
+|---|---|---:|---:|---:|---:|---:|---|
+| intel22 | tv80s_f3 | **49.75 s** | 5.13 % | 17.91 % | 13.82 % | 0.9919 | bundled smoke |
+| ASAP7 | gcd_x1 | **6.32 s** | 13.19 % | 23.30 % | 17.73 % | 0.9326 | TRAIN-set (in-distribution) |
+| ASAP7 | tv80s_x1 | **62.13 s** | **11.23 %** | 25.18 % | 13.80 % | 0.9655 | OOD test, **cold-honest** |
+
+### Why cold-MAPE > warm-MAPE on ASAP7 (4.5 pp gap)
+
+The warm-eval inference (`02_inference.py`) consumes the `fanout` column
+straight from the pre-computed feature CSV — which was derived from the
+**golden SPEF coupled_caps key count**. So the inference uses a perfect
+ground-truth fanout signal at evaluation time. This inflates warm-eval MAPE.
+
+`pex_cold.py` replaces that label-leaking input with a **DEF-only fanout
+proxy** (8-feature XGBoost-Tweedie):
+- intel22 fanout proxy OOS MAPE_med = **12 %**
+- ASAP7 fanout proxy OOS MAPE_med = **20.7 %**
+
+Since `fanout` has `feature_importance = 0.81` on the cpl XGBoost (and the
+main cpl/total model is highly cpl-driven), a 20 % degradation in the proxy
+directly hits cpl prediction, then total. The 4.5 pp tv80s warm→cold gap on
+ASAP7 (6.68 → 11.23 %) is explained almost entirely by this fanout proxy
+degradation. On intel22 the warm→cold gap is smaller (4.98 → 5.13 %, just
+0.15 pp) because the intel22 proxy is more accurate.
+
+**Honest paper claim**:
+- intel22 cold tv80s **5.13 %** in **50 s**, license-free, no SPEF needed at inference.
+- ASAP7 cold tv80s **11.23 %** in **62 s** (1.25× wall vs intel22) — usable
+  but **fanout proxy is the main remaining accuracy lever** on ASAP7.
+  Future work: retrain a per-PDK fanout proxy or, better, replace it with a
+  netlist-derived deterministic fanout (Liberty pin count).
+
+### Cold runtime breakdown (ASAP7 tv80s_x1)
+
+| Stage | Wall | % of total |
+|---|---:|---:|
+| PDK parse | 0.03 s | 0.05 % |
+| DEF parse | 1.59 s | 2.6 % |
+| V3 features (njit) | 8.04 s | 12.9 % |
+| **V4 H3 (tile-pkl read + per-net agg)** | **48.44 s** | **78.0 %** |
+| Inference (5-seed × gnd+cpl) | 3.92 s | 6.3 % |
+| SPEF write | 0.11 s | 0.2 % |
+| **Total** | **62.13 s** | 100 % |
+
+V4 H3 dominates (78 %). On nova (125K nets, ~5.7M cuboids) this stage scales
+roughly linearly; nova cold-run estimate ~30–50 min. Acceleration target:
+either (a) build a Round 2.1-style `<design>_v4_pernet.cubs.npy` indexed
+cache for ASAP7 (10–30× speedup, mirrors intel22) or (b) Numba-JIT the V4
+inner kernel like V3 Round 4.
+
 ## Reproduction
 
 ```bash

@@ -48,19 +48,56 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]   # TreePEX/ repo root (standalone)
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "scripts"))
+
+# Pre-parse --pdk from sys.argv so module-level globals (MODELS_DIR,
+# FEATURE_COLS_67, fanout proxy, TILE_CACHE_ROOT, PDK files) bind to the
+# right PDK before argparse runs. Default = intel22 (backward compat).
+_PDK_NAME = "intel22"
+for _i, _a in enumerate(sys.argv):
+    if _a == "--pdk" and _i + 1 < len(sys.argv):
+        _PDK_NAME = sys.argv[_i + 1]
+        break
+    if _a.startswith("--pdk="):
+        _PDK_NAME = _a.split("=", 1)[1]
+        break
 
 from src.preprocessing.def_parser import DefStreamParser
 from src.preprocessing.lef_parser import LefParser
 from src.preprocessing.cell_parser import CellLibParser
 from src.preprocessing.layer_parser import LayerInfoParser
 from src.physics.materials import BEOLMaterialStack
-from configs.config import (
-    TECH_LEF_PATH, CELL_LEF_PATH, LAYERS_INFO_PATH,
-    GOLDEN_SPEF_DIR, TILE_CACHE_ROOT, DESIGNS,
-    resolve_golden_spef,
-)
+from configs.config import resolve_golden_spef
+from pdk_paths import get_pdk
 
-MODELS_DIR = ROOT / "models"
+_PDK = get_pdk(_PDK_NAME)
+
+# PDK-specific paths (resolved from PDK_REGISTRY in pdk_paths.py)
+if _PDK_NAME == "asap7":
+    TECH_LEF_PATH = ROOT / "tool" / "pdk" / "7nm" / "lef" / "asap7_tech_1x_201209_JS.lef"
+    CELL_LEF_PATH = ROOT / "tool" / "pdk" / "7nm" / "lef" / "asap7sc7p5t_28_R_1x_220121a.lef"
+    LAYERS_INFO_PATH = ROOT / "tool" / "pdk" / "7nm" / "layers" / "layers.info"
+    TILE_CACHE_ROOT = Path(os.environ.get(
+        "TREEPEX_ASAP7_TILE_CACHE_ROOT",
+        "/data/PINNPEX/data/processed_v3/asap7"))
+    GOLDEN_SPEF_DIR = _PDK.golden_spef_dir
+    # ASAP7 designs registry (DEF paths)
+    _asap7_def_dir = Path(os.environ.get(
+        "TREEPEX_ASAP7_DEF_DIR",
+        "/home2/hyshin/ICCAD2026/results/def/asap7"))
+    DESIGNS = {
+        "asap7_tv80s_x1": _asap7_def_dir / "asap7_tv80s_x1.def",
+        "asap7_nova_x1":  _asap7_def_dir / "asap7_nova_x1.def",
+        "asap7_gcd_x1":   ROOT / "data" / "def" / "asap7_gcd_x1.def",
+    }
+else:
+    # intel22 (default, backward-compat — uses configs/config.py globals)
+    from configs.config import (
+        TECH_LEF_PATH, CELL_LEF_PATH, LAYERS_INFO_PATH,
+        GOLDEN_SPEF_DIR, TILE_CACHE_ROOT, DESIGNS,
+    )
+
+MODELS_DIR = _PDK.models_dir
 PRED_DIR = ROOT / "outputs" / "predictions"
 SPEF_DIR_OUT = ROOT / "outputs" / "spef"
 COLD_REPORT_DIR = ROOT / "outputs" / "cold_reports"
@@ -1705,7 +1742,10 @@ SPEF_HEADER_TMPL = """*SPEF "IEEE 1481-1999"
 
 
 def write_spef(design: str, df: pd.DataFrame, out_path: Path):
-    stem = design.split("intel22_")[-1].replace("_f3", "")
+    if design.startswith("asap7_"):
+        stem = design.replace("asap7_", "", 1).rsplit("_x1", 1)[0]
+    else:
+        stem = design.split("intel22_")[-1].replace("_f3", "")
     date_str = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
     header = SPEF_HEADER_TMPL.format(design=stem, date=date_str)
     lines = [header]
@@ -1947,6 +1987,9 @@ def main():
     ap.add_argument("--design", type=str, default=None)
     ap.add_argument("--workers", type=int, default=16)
     ap.add_argument("--serial", action="store_true")
+    ap.add_argument("--pdk", default="intel22", choices=["intel22", "asap7"],
+                    help="PDK selector. intel22 = bundled 22nm (default). "
+                         "asap7 = ASAP7 7nm cross-PDK (uses models_asap7/).")
     ap.add_argument("--v3-gpu", action="store_true",
                     help="Run V3 closest-pair on torch + CUDA (single-process, "
                          "no fork-Pool). Round 2.2.")
@@ -1957,6 +2000,10 @@ def main():
                          "legacy (always numpy broadcast), njit (Round 4 "
                          "@njit kernel + CSR dense grid + int owner ids).")
     args = ap.parse_args()
+    if args.pdk != _PDK_NAME:
+        # Should not happen because we pre-parsed --pdk at module import time
+        raise SystemExit(f"--pdk={args.pdk} but module bound to {_PDK_NAME!r}; "
+                         "pass --pdk before any other flag.")
     if args.design:
         if args.design not in DESIGNS:
             raise SystemExit(f"unknown design {args.design}")
