@@ -11,14 +11,15 @@
 
 ## 1. 한 줄 소개
 
-License-free PEX 도구로, StarRC와 **동일한 입력**(DEF / LEF / Liberty / layer stack)을 받아
-**4.98% MAPE / 7 s (tv80s)** 또는 **5.28% MAPE / 70 s (nova)** 정확도/속도로 SPEF를 생성한다.
-Cadence Innovus (6.96% / 분 단위)와 OpenRCX (8.83% / 분 단위) 대비 정확도 + 속도 모두 우위.
+License-free PEX 도구. 사용자가 **DEF + LEF + layer.info만** 주면, 사전학습 모델로 SPEF를 cold from-scratch (no pre-computed features, no golden) 생성한다. **사용 시나리오: GitHub clone → 본인의 DEF → `pex_cold.py` 한 줄 → SPEF 파일**. 이 워크플로의 wall-clock + MAPE 가 paper-honest claim.
 
-**Cross-PDK** (2026-05-14 추가): Intel 22nm + **ASAP7 7nm** 두 PDK 모두 지원.
-ASAP7 5-seed Tweedie XGBoost ensemble — tv80s 6.68% / nova 7.03% MAPE.
-**Methodology bit-identical** (same hyperparams, 67-D feature schema, 5 seeds).
-Per-PDK 사용법: `python3 scripts/pex_tool.py --pdk asap7 --design asap7_gcd_x1` ([docs/CROSS_PDK.md](docs/CROSS_PDK.md)).
+| PDK | Design | Cold wall (DEF→SPEF) | MAPE_tot | 비고 |
+|---|---|---:|---:|---|
+| **Intel 22nm** | intel22_tv80s_f3 | **50 s** | **5.13 %** | 번들 smoke (작동 검증) |
+| **ASAP7 7nm** | asap7_gcd_x1 | **6.3 s** | 13.19 % | 번들 smoke (in-distribution) |
+| **ASAP7 7nm** | asap7_tv80s_x1 | **62 s** | **11.23 %** | OOD test, cold-honest |
+
+Cold-from-scratch 만 사용자 경험이고 paper claim. Pre-computed feature CSV 가 있을 때의 warm-eval 수치는 internal development benchmark (label-leaking — `fanout` 이 SPEF에서 추출됨) — `docs/CROSS_PDK.md` 참조.
 
 ---
 
@@ -34,35 +35,50 @@ pip install -r requirements.txt
 
 `requirements.txt`는 numpy, pandas, xgboost, numba (선택). Python 3.11+.
 
-### 2.2 번들 데이터로 즉시 실행 (intel22_tv80s_f3)
+### 2.2 번들 데이터로 즉시 실행
 
+**Intel 22nm** (intel22_tv80s_f3):
 ```bash
 python3 scripts/pex_cold.py --design intel22_tv80s_f3 --v3-algo njit
+# → 50 s, MAPE tot=5.13% gnd=17.91% cpl=13.82% R²=0.9919
 ```
+- 입력: `data/def/intel22_tv80s_f3.def` + `tool/pdk/22nm/` (모두 번들)
+- 출력: `outputs/spef/intel22_tv80s_f3_cold_pred.spef`
 
-- 입력: `data/def/intel22_tv80s_f3.def` (3.9 MB, 동봉)
-- PDK: `tool/pdk/22nm/` (~6 MB, 동봉)
-- Golden SPEF: `data/golden_spef/intel22_tv80s_f3_starrc.spef.gz` (12 MB compressed, 자동 읽기)
-- 출력: `outputs/spef/intel22_tv80s_f3_pred.spef`, `outputs/cold_reports/cold_summary.json`
-
-End-to-end 약 50 s (16-worker CPU). 기대 결과:
+**ASAP7 7nm** (asap7_gcd_x1, 번들 smoke):
+```bash
+python3 scripts/pex_cold.py --pdk asap7 --design asap7_gcd_x1 --v3-algo njit
+# → 6.3 s, MAPE tot=13.2% (gcd is TRAIN-set, in-distribution sanity check)
 ```
-intel22_tv80s_f3 | n=3,280 | MAPE tot=5.12% gnd=17.91% cpl=13.81% | R²_tot=0.9920
-```
+- 입력: `data/def/asap7_gcd_x1.def` + `tool/pdk/7nm/` (모두 번들)
+- 모델: `models_asap7/` (5-seed Tweedie XGBoost ensemble)
 
-### 2.3 새로운 design 처리
+ASAP7 의 진짜 OOD test 인 `tv80s_x1`, `nova_x1` 은 DEF + golden SPEF 가 사이트에 있어야 하고 (용량 때문에 미번들), `--design asap7_tv80s_x1` + `TREEPEX_DEF_DIR`/`TREEPEX_GOLDEN_DIR` env override 로 실행.
+
+### 2.3 새로운 design 처리 (GitHub clone 시 사용자 워크플로)
 
 ```bash
-# (1) DEF 파일 경로 설정 (선택 — 기본 data/def/ 사용)
+# (1) DEF 파일 경로 설정 (필수 — 본인 design 위치)
 export TREEPEX_DEF_DIR=/path/to/your/def
-export TREEPEX_GOLDEN_DIR=/path/to/your/golden_spef  # 선택, golden 비교용
+export TREEPEX_GOLDEN_DIR=/path/to/your/golden_spef  # 선택, MAPE 측정용 (없으면 SPEF만 생성)
 
-# (2) configs/config.py의 DESIGNS dict에 design 추가
-#     "my_design": DEF_DIR / "my_design.def"
+# (2) configs/config.py의 DESIGNS dict 또는 scripts/pex_cold.py
+#     PDK_DESIGNS 등록 — 이름은 자유롭게 (e.g. "my_chip")
 
-# (3) 실행
-python3 scripts/pex_cold.py --design my_design --v3-algo njit
+# (3) 실행 (PDK 선택)
+python3 scripts/pex_cold.py --pdk intel22 --design my_chip --v3-algo njit
+# 또는 ASAP7:
+python3 scripts/pex_cold.py --pdk asap7 --design my_asap7_chip --v3-algo njit
 ```
+
+**Paper-grade workflow** (사용자가 실제로 경험하는 것):
+1. `git clone https://github.com/LeeJS00/TreePEX.git`
+2. `cd TreePEX && pip install -r requirements.txt`
+3. 본인 DEF/LEF 준비
+4. `python3 scripts/pex_cold.py --pdk <intel22|asap7> --design <name>`
+5. `outputs/spef/<name>_cold_pred.spef` 생성
+
+이게 paper에서 claim 하는 **전체 wall-clock + MAPE** 의 기준.
 
 ### 2.4 V3 backend 선택
 
@@ -142,31 +158,47 @@ SPEF schema (per net):
 
 ## 5. 성능 (golden = StarRC)
 
-### 5.1 정확도
+### 5.1 Cold from-scratch — **paper-grade (GitHub clone 시나리오)**
 
-| PDK | Design | tot MAPE | gnd MAPE | cpl MAPE | R²_tot |
-|---|---|---:|---:|---:|---:|
-| **Intel 22nm** | **intel22_tv80s_f3** (3,280 nets) | **4.98 %** | 18.02 % | 13.27 % | 0.9940 |
-| **Intel 22nm** | **intel22_nova_f3** (113,812 nets) | **5.28 %** | 17.40 % | 14.96 % | 0.9911 |
-| **ASAP7 7nm** | **asap7_tv80s_x1** (3,328 nets) | **6.68 %** | 20.17 % | 9.10 % | 0.9801 |
-| **ASAP7 7nm** | **asap7_nova_x1** (125,499 nets) | **7.03 %** | 21.22 % | 9.35 % | 0.9816 |
+DEF → V3 + V4 H3 feature 추출 → 5-seed XGBoost inference → SPEF write. 사용자가 본인 머신에서 `pex_cold.py` 한 줄로 측정한 wall-clock + MAPE.
 
-ASAP7 모델은 `models_asap7/` 에 동봉. 자세한 cross-PDK 분석은 [paper_benchmark/CROSS_PDK_TABLE.md](paper_benchmark/CROSS_PDK_TABLE.md) 참조.
+| PDK | Design | nets | Cold wall | MAPE_tot | MAPE_gnd | MAPE_cpl | R²_tot |
+|---|---|---:|---:|---:|---:|---:|---:|
+| **Intel 22nm** | intel22_tv80s_f3 | 3,280 | **49.7 s** | **5.13 %** | 17.91 % | 13.82 % | 0.9919 |
+| **Intel 22nm** | intel22_nova_f3 | 113,812 | **4906 s** (~82 min) | **5.12 %** | 17.91 % | 13.81 % | 0.9920 |
+| **ASAP7 7nm** | asap7_tv80s_x1 | 3,328 | **62.1 s** | **11.23 %** | 25.18 % | 13.80 % | 0.9655 |
+| **ASAP7 7nm** | asap7_nova_x1 | 125,499 | _measuring_ | _measuring_ | — | — | — |
 
-### 5.2 Wall-clock (DEF → SPEF, 16-worker, Round 4 njit)
+**ASAP7 cold MAPE 가 warm-eval (6.68%) 보다 4.55pp 높은 이유**: `fanout` 칼럼은 학습 데이터에서 SPEF의 coupled_caps 개수에서 추출됨 → warm-eval inference 는 golden SPEF 의 ground-truth fanout 을 보고 예측 (label-leaking). pex_cold 는 SPEF 가 없으므로 8-feature XGB-Tweedie proxy 로 대체 — ASAP7 proxy OOS MAPE 20.7%. cpl XGBoost 의 `fanout` feature_importance = 0.81 이라 proxy 정확도가 cpl→total 을 직격. Intel22 proxy 는 12% OOS 라 cold/warm gap 0.15pp 에 그침. (→ Future work: deterministic netlist-derived fanout)
+
+자세한 cross-PDK + cold breakdown: [paper_benchmark/CROSS_PDK_TABLE.md](paper_benchmark/CROSS_PDK_TABLE.md).
+
+### 5.2 Warm-eval — **internal development benchmark only**
+
+사이트에 pre-computed V3 + V4 H3 feature CSV + golden SPEF 가 있을 때 `02_inference.py` 만 실행. **사용자가 보는 cold 워크플로가 아니라** 개발자가 모델만 격리해서 튜닝할 때 쓰는 internal tool. `fanout` 이 SPEF에서 직접 가져와 ASAP7 number 가 cold 보다 좋게 나옴 — paper claim 으로 사용 금지.
+
+| PDK | Design | warm MAPE | 비고 |
+|---|---|---:|---|
+| intel22 | tv80s_f3 | 4.98 % | golden-fanout, dev-only |
+| intel22 | nova_f3 | 5.28 % | golden-fanout, dev-only |
+| ASAP7 | tv80s_x1 | 6.68 % | golden-fanout, dev-only |
+| ASAP7 | nova_x1 | 7.03 % | golden-fanout, dev-only |
+
+### 5.3 Wall-clock breakdown (cold, 16-worker, Round 4 njit)
 
 | Design | Pipeline | DEF parse | V3 features | V4 features | Inference | SPEF write |
 |---|---:|---:|---:|---:|---:|---:|
-| tv80s | **48.2 s** | 2.1 s | **3.5 s** | 38.2 s | 3.9 s | 0.1 s |
-| nova  | **4,906 s** | 94 s | **2,352 s** | 2,384 s | 6.4 s | 3.8 s |
+| intel22_tv80s_f3 | **49.7 s** | 2.1 s | **4.8 s** | 38.0 s | 4.5 s | 0.12 s |
+| intel22_nova_f3 | **4906 s** | 94 s | **2352 s** | 2384 s | 6.4 s | 3.8 s |
+| asap7_tv80s_x1 | **62.1 s** | 1.6 s | **8.0 s** | **48.4 s** (78%) | 3.9 s | 0.11 s |
 
-Round 0 (pre-patch) 대비 누적 가속: tv80s **3.52×**, nova **1.64×**. V3 단독 nova **2.38×**. 세부: [`COLD_START_SPEEDUP_REPORT.md`](COLD_START_SPEEDUP_REPORT.md).
+Round 0 (pre-patch) 대비 누적 V3 가속: tv80s **3.52×**, nova **2.38×**. ASAP7 의 V4 H3 stage 가 cold 의 78% — 향후 `<design>_v4_pernet.cubs.npy` indexed cache 빌드 (intel22 fastpath mirror) 로 10-30× V4 speedup 가능. 세부: [`COLD_START_SPEEDUP_REPORT.md`](COLD_START_SPEEDUP_REPORT.md).
 
-### 5.3 경쟁 도구 비교
+### 5.4 경쟁 도구 비교 (intel22 cold)
 
 | Tool | License | tot MAPE | tv80s wall |
 |---|---|---:|---:|
-| **TreePEX** | **free (MIT)** | **4.98 %** | **7 s** |
+| **TreePEX cold** | **free (MIT)** | **5.13 %** | **50 s** |
 | v12 PINN | free | 8.23 % | 10 s |
 | Cadence Innovus | commercial | 6.96 % | ~120 s |
 | OpenRCX | free | 8.83 % | ~60 s |
