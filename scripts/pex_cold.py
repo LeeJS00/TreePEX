@@ -1917,6 +1917,56 @@ def run_design(design: str, def_path: Path, n_workers: int,
     X = feat_df[FEATURE_COLS_67].astype(np.float32).values
     pred_g = predict_ensemble(g_models, X)
     pred_c = predict_ensemble(c_models, X)
+
+    # L5 post-hoc calibration (2026-05-15) — PDK-specific, fit on valid split.
+    # Three stages: (a) per-net-category multiplier, (b) per-fanout-band
+    # isotonic, (c) per-cap-magnitude isotonic on total. No-op if calibration.json
+    # missing or load fails.
+    _calib_path = MODELS_DIR / "calibration.json"
+    if _calib_path.exists():
+        try:
+            calib = json.loads(_calib_path.read_text())
+            t_calib0 = time.time()
+
+            def _classify(name):
+                n = str(name).upper()
+                if n.startswith("CTS_") or "_CTS_" in n: return "cts"
+                if n.startswith("FE_DBT") or n.startswith("FE_OFC") or n.startswith("FE_OFN"): return "cts_buf"
+                if n.startswith("FE_RN_") or n.startswith("FE_PSB"): return "fe_buf"
+                if "_REG_" in n or "_REG[" in n: return "reg"
+                if "[" in n and "]" in n: return "bus"
+                if n.startswith("N_"): return "auto"
+                return "other"
+
+            def _isoband(pred, x, band):
+                if band is None or len(band.get("x", [])) < 2:
+                    return pred
+                return pred * np.interp(x, np.asarray(band["x"]), np.asarray(band["ratio"]))
+
+            cat = feat_df["net_name"].apply(_classify)
+            cat_dict = calib.get("step_a_per_category", {})
+            rg = cat.map(lambda c: cat_dict.get(c, {}).get("ratio_g", 1.0)).values
+            rc = cat.map(lambda c: cat_dict.get(c, {}).get("ratio_c", 1.0)).values
+            pred_g = pred_g * rg
+            pred_c = pred_c * rc
+
+            fanout_log = np.log1p(feat_df["fanout"].values)
+            pred_g = _isoband(pred_g, fanout_log,
+                              calib.get("step_b_per_fanout_log", {}).get("gnd"))
+            pred_c = _isoband(pred_c, fanout_log,
+                              calib.get("step_b_per_fanout_log", {}).get("cpl"))
+
+            pred_t = pred_g + pred_c
+            pred_t_log = np.log1p(pred_t)
+            pred_t_new = _isoband(pred_t, pred_t_log, calib.get("step_c_per_total_log"))
+            # Distribute step (c) ratio proportionally onto gnd/cpl
+            scale = pred_t_new / np.maximum(pred_t, 1e-6)
+            pred_g = pred_g * scale
+            pred_c = pred_c * scale
+            timings["t_calibration_s"] = round(time.time() - t_calib0, 3)
+            print(f"[{design}] calibration: {timings['t_calibration_s']}s", flush=True)
+        except Exception as e:
+            print(f"[{design}] calibration skipped: {e}", flush=True)
     pred_df = feat_df[["net_name"]].copy()
     pred_df["pred_gnd"] = pred_g
     pred_df["pred_cpl"] = pred_c
