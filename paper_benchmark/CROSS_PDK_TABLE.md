@@ -188,6 +188,23 @@ degradation. On intel22 the warm→cold gap is smaller (4.98 → 5.13 %, just
   Future work: retrain a per-PDK fanout proxy or, better, replace it with a
   netlist-derived deterministic fanout (Liberty pin count).
 
+### Cold-error reduce levers tested (2026-05-15)
+
+After establishing v3 TRAIN_9 baseline (tv80s cold 10.66%, nova cold 11.34%),
+attempted further levers documented in cold-error-reduce plan:
+
+| Lever | Description | tv80s cold | Δ | Verdict |
+|---|---|---:|---:|---|
+| Baseline | v3 TRAIN_9 + 8-feat proxy | 10.66% | — | **CANONICAL** |
+| L1 | Cold-aware training (replace SPEF fanout with proxy in train) | 11.64% | +0.98pp | ❌ REJECT |
+| L2 | Stronger fanout proxy (31 feat, depth=8, n_est=500) | 12.24% | +1.58pp | ❌ REJECT |
+
+**Why L1 failed**: proxy is a deterministic function of features → fanout becomes redundant after substitution. Model can recover any signal from other features; injected proxy noise just degrades training without distribution alignment.
+
+**Why L2 failed**: stronger proxy is more accurate (12.4% OOS vs 20.7%) but produces shifted mean (38.9 vs golden 41.3). Main XGBoost trained on golden mean (96.0) → applied to lower proxy mean → under-predicts cpl → larger total MAPE. Proxy accuracy ↑ alone doesn't help; train-inference distribution match is what matters.
+
+**L4 (deterministic Liberty fanout)** would be the real fix but SPEF's `coupled_caps` count is intrinsically routing-physics-dependent (not derivable from Liberty alone). Alternative `n_aggressor_nets` geometric proxy saturates at 256 on dense ASAP7 routing (p50 = p95 = 256). Future work: uncap aggressor enumeration + rebuild features.
+
 ### Cold runtime breakdown (ASAP7 tv80s_x1)
 
 | Stage | Wall | % of total |
