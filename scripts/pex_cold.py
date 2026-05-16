@@ -1918,6 +1918,32 @@ def run_design(design: str, def_path: Path, n_workers: int,
     pred_g = predict_ensemble(g_models, X)
     pred_c = predict_ensemble(c_models, X)
 
+    # L8 stacked residual (2026-05-16) — PDK-specific, fit on valid split.
+    # Predicts (gold - pred_base) from features + pred_base. Applied BEFORE
+    # calibration so the calibration sees corrected predictions. No-op if
+    # residual model files missing.
+    _resid_meta_path = MODELS_DIR / "residual_stack_meta.json"
+    _resid_g_path = MODELS_DIR / "residual_gnd.json"
+    _resid_c_path = MODELS_DIR / "residual_cpl.json"
+    if _resid_meta_path.exists() and _resid_g_path.exists() and _resid_c_path.exists():
+        try:
+            t_r0 = time.time()
+            r_meta = json.loads(_resid_meta_path.read_text())
+            import xgboost as _xgb_res
+            rm_g = _xgb_res.XGBRegressor(); rm_g.load_model(str(_resid_g_path))
+            rm_c = _xgb_res.XGBRegressor(); rm_c.load_model(str(_resid_c_path))
+            feat_df["pred_gnd_base"] = pred_g
+            feat_df["pred_cpl_base"] = pred_c
+            Xr = feat_df[r_meta["feats"]].astype(np.float32).values
+            pred_g = pred_g + rm_g.predict(Xr)
+            pred_c = pred_c + rm_c.predict(Xr)
+            pred_g = np.maximum(pred_g, 0.0)
+            pred_c = np.maximum(pred_c, 0.0)
+            timings["t_residual_stack_s"] = round(time.time() - t_r0, 3)
+            print(f"[{design}] residual stack: {timings['t_residual_stack_s']}s", flush=True)
+        except Exception as e:
+            print(f"[{design}] residual stack skipped: {e}", flush=True)
+
     # L5 post-hoc calibration (2026-05-15) — PDK-specific, fit on valid split.
     # Three stages: (a) per-net-category multiplier, (b) per-fanout-band
     # isotonic, (c) per-cap-magnitude isotonic on total. No-op if calibration.json
