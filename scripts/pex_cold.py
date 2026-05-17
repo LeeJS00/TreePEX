@@ -1993,6 +1993,42 @@ def run_design(design: str, def_path: Path, n_workers: int,
             print(f"[{design}] calibration: {timings['t_calibration_s']}s", flush=True)
         except Exception as e:
             print(f"[{design}] calibration skipped: {e}", flush=True)
+
+    # L11 large-net specialist (2026-05-17) — replaces canonical+calibrated
+    # prediction for nets matching a feature-based "large net" gate. Specialist
+    # was trained on training rows with gold_total > 3 fF using deeper trees
+    # (depth=9, n_est=750). Switch is FEATURE-BASED (not pred-based) to keep
+    # decisions deterministic + reproducible: `total_wire_length_um > T_um`.
+    # No-op if specialist_meta.json missing.
+    _spec_meta_path = MODELS_DIR / "specialist_meta.json"
+    if _spec_meta_path.exists():
+        try:
+            t_spec0 = time.time()
+            spec_meta = json.loads(_spec_meta_path.read_text())
+            sw_feat = spec_meta["switch_feature"]
+            sw_thr = float(spec_meta["switch_threshold"])
+            import xgboost as _xgb_spec
+            spec_g_models, spec_c_models = [], []
+            for s in SEEDS:
+                mg = _xgb_spec.XGBRegressor()
+                mg.load_model(str(MODELS_DIR / f"tweedie_specialist_gnd_seed{s}.json"))
+                mc = _xgb_spec.XGBRegressor()
+                mc.load_model(str(MODELS_DIR / f"tweedie_specialist_cpl_seed{s}.json"))
+                spec_g_models.append(mg); spec_c_models.append(mc)
+            spec_pred_g = predict_ensemble(spec_g_models, X)
+            spec_pred_c = predict_ensemble(spec_c_models, X)
+            switch_mask = feat_df[sw_feat].values > sw_thr
+            n_routed = int(switch_mask.sum())
+            pred_g = np.where(switch_mask, spec_pred_g, pred_g)
+            pred_c = np.where(switch_mask, spec_pred_c, pred_c)
+            timings["t_specialist_s"] = round(time.time() - t_spec0, 3)
+            timings["n_specialist_routed"] = n_routed
+            print(f"[{design}] L11 specialist: {timings['t_specialist_s']}s  "
+                  f"routed {n_routed:,}/{len(switch_mask):,} nets "
+                  f"({n_routed/max(len(switch_mask),1)*100:.1f}%)", flush=True)
+        except Exception as e:
+            print(f"[{design}] L11 specialist skipped: {e}", flush=True)
+
     pred_df = feat_df[["net_name"]].copy()
     pred_df["pred_gnd"] = pred_g
     pred_df["pred_cpl"] = pred_c

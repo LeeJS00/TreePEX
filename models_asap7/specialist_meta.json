@@ -1,0 +1,20 @@
+{
+  "switch_feature": "total_wire_length_um",
+  "switch_threshold": 15.35,
+  "train_threshold_fF": 3.0,
+  "n_train_subset": 10915,
+  "config": {
+    "depth": 9,
+    "n_est": 750,
+    "lr": 0.05,
+    "vp": 1.5,
+    "early_stop": 100
+  },
+  "seeds": [
+    42,
+    0,
+    1,
+    2,
+    3
+  ]
+}
