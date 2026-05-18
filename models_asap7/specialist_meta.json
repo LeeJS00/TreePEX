@@ -4,8 +4,8 @@
   "train_threshold_fF": 3.0,
   "n_train_subset": 10915,
   "config": {
-    "depth": 9,
-    "n_est": 750,
+    "depth": 8,
+    "n_est": 500,
     "lr": 0.05,
     "vp": 1.5,
     "early_stop": 100
